@@ -1,0 +1,19 @@
+a+b
+pépe
+brayanb
+brayanb
+huevos 23
+	public void buscar(String s, int x, int linea) {
+		if(s.equals("")) {
+		}else if(find.contain(s)) {
+			System.out.println(s + " posicion: " + linea + ", " + x);
+		}else if(!identificadores.contains(s)) {
+			identificadores.add(s);
+			System.out.println("Identificador: " + s + " Posicion: " + linea + ", " + x + " Tipo 1");
+
+		}else if(identificadores.contains(s)) {
+			System.out.println("Identificador: " + s + " Posicion:" + linea + ", " + x + " Tipo 1");
+>
+=
+
+		}
