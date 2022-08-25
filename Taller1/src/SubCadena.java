@@ -221,6 +221,11 @@ public class SubCadena {
 //		}
 //
 //	}
-	// brayan el mas lindo de todos
+//Plan de accion:
+//1. Crear ArrayList donde se guarden valores desde el 0-9
+//2. Crear un arraylist Numeros vacio, donde a medida que se lea el codigo, vaya guardando los numeros encontrados y los identificadores que tengan un valor numerico
+//3. Codigo para identificar operaciones aritmeticas con la estructura numero + Operador + numero. Obviando espacios
+//4. Tabla de tokens, Preguntar.
+//5. Interfaz para mostrar lo que se muestra en consola.
 
 }
