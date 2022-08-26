@@ -7,6 +7,8 @@ import java.util.ArrayList;
 //Versión del archivo que no se envió
 
 public class SubCadena {
+	
+	
 	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java.
 	ArrayList<String> separadores = new ArrayList<String>();
 	ArrayList<String> operadores = new ArrayList<String>();
@@ -14,6 +16,8 @@ public class SubCadena {
 	ArrayList<String> find = new ArrayList<String>();
 	ArrayList<String> tipo2 = new ArrayList<String>();
 	ArrayList<String> tipo3 = new ArrayList<String>();
+	ArrayList<String> naturales = new ArrayList<String>();
+	ArrayList<Integer> numeros = new ArrayList<Integer>();
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
 	//los metodos fill estan detallados mas abajo.
@@ -25,18 +29,27 @@ public class SubCadena {
 		this.find = fillFind();
 		this.tipo2 = fillTipo2();
 		this.tipo3 = fillTipo3();
-		
+		this.naturales = fillNaturales();
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(doc));
 			leer(br);
 			br.close();
+			for (int i = 0; i < numeros.size(); i++) {
+				System.out.println(numeros.get(i));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	
+	
+	
+
+
+
 	public SubCadena() {
 		super();
 		this.separadores = fillSeparadores();
@@ -44,12 +57,17 @@ public class SubCadena {
 		this.find = fillFind();
 		this.tipo2 = fillTipo2();
 		this.tipo3 = fillTipo3();
-		
+		this.naturales = fillNaturales();
 		
 	}
 	
-	//Método que llena la lista de separadores simbolos de tipo separador. 
+	public ArrayList<String> fillNaturales() {
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add("0");temp.add("1");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
+		return temp;
+	}
 	
+	//Método que llena la lista de separadores simbolos de tipo separador. 
 	public ArrayList<String> fillSeparadores() {
 		//Se crea una lista temporal para añadir los separadores, y se retorna temp para que pueda ser asignado a la respectiva lista
 		//																						de separadores.		
@@ -121,6 +139,8 @@ public class SubCadena {
 			contador++; 
 		}
 	}
+	//aaa323asd
+
 	
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posición en la linea y la linea.
 	public void buscar(String s, int x, int linea) {
@@ -148,6 +168,7 @@ public class SubCadena {
 		String subString;
 		//Este for analiza cada linea del fichero, esta linea llega desde el parametro .
 		for(int x = 0; x < s.length(); x++) {
+			
 			//Se pregunta si es separador o operador (ambos separan). Esto nos define un símbolo completo para analizar.
 			if(separadores.contains(s.charAt(x)+"") || operadores.contains(s.charAt(x) + "")) {
 				//Se identifica si es separador o operador
