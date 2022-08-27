@@ -139,7 +139,15 @@ public class SubCadena {
 			contador++; 
 		}
 	}
-	//aaa323asd
+	
+	public void analizarExpresion(String s) {
+		int cont=0;
+		for (int i = 0; i < s.length(); i++) {
+			if(naturales.contains(s.charAt(i)+"")) {
+				cont++;
+			}
+		}
+	}
 
 	
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posición en la linea y la linea.
