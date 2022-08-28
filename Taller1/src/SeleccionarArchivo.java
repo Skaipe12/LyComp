@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 public class SeleccionarArchivo extends JFrame{
 
 	private static final long serialVersionUID = -1440264901664686208L;
+	private JButton btnSeleccionarArchivo;
 	
 	public SeleccionarArchivo() throws HeadlessException {
 		super("Uso JFileChooser");
@@ -27,8 +28,8 @@ public class SeleccionarArchivo extends JFrame{
 		getContentPane().setSize(new Dimension(300, 300));
 		getContentPane().setLayout(null);
 		
-		JButton btnSeleccionarArchivo = new JButton("Seleccionar archivo ...");
-		btnSeleccionarArchivo.setBounds(72, 5, 139, 23);
+		btnSeleccionarArchivo = new JButton("Seleccionar archivo ...");
+		btnSeleccionarArchivo.setBounds(32, 16, 267, 45);
 		getContentPane().add(btnSeleccionarArchivo);
 		
 		JLabel lbImput = new JLabel("Input");
@@ -36,8 +37,13 @@ public class SeleccionarArchivo extends JFrame{
 		getContentPane().add(lbImput);
 		
 		JLabel lblTokensTable = new JLabel("Tabla de Tokens");
-		lblTokensTable.setBounds(10, 341, 101, 14);
+		lblTokensTable.setBounds(10, 341, 161, 14);
 		getContentPane().add(lblTokensTable);
+		
+		JTextArea contenido = new JTextArea();
+		contenido.setEditable(false);
+		contenido.setBounds(20, 107, 420, 224);
+		getContentPane().add(contenido);
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
 		//Expresión lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {
