@@ -21,7 +21,7 @@ public class SubCadena {
 	static ArrayList<String> expresiones = new ArrayList<String>();
 	static String texto;
 	static String texto2;
-	
+	static int contTokenIdent = 32;
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
 	//los metodos fill estan detallados mas abajo.
@@ -261,7 +261,7 @@ public class SubCadena {
 	
 	
 	private void clasificarToken(String lexema) {
-	int tokenId;
+	int tokenId=0;
 	String token;
 		switch (lexema) {
 	case "if": {
@@ -432,12 +432,24 @@ public class SubCadena {
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
 	}
 	default:
-		token = "identificador";
-		tokenId = 32;
+		if(lexema == "") {
+			
+		} else {
+		if(identificadores.contains(lexema)) {
+			token = "Identificador";
+			tokenId = identificadores.indexOf(lexema)+33;
+		} else {
+			
+			token = "identificador";
+			tokenId += contTokenIdent;
+			contTokenIdent++;
+		}
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
 	}
+		}
 		
 }
+
 	
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
