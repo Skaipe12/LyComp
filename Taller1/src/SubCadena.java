@@ -44,12 +44,6 @@ public class SubCadena {
 		}
 	}
 	
-	
-	
-	
-
-
-
 	public SubCadena() {
 		super();
 		this.separadores = fillSeparadores();
@@ -180,16 +174,16 @@ public class SubCadena {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
 			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada");
-			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada";
+			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
 			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador");
-			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador";
+			texto = texto + s + "\t" + linea + ", " + x + "\tidentificador";
 			//Si sí lo tiene, imprime su ubicación-
 		}else if(identificadores.contains(s)) {
 			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador");
-			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador";
+			texto = texto + s + "\t" + linea + ", " + x + "\tIdentificador";
 		}
 		texto = texto + "\n";
 	}
@@ -217,7 +211,7 @@ public class SubCadena {
 					buscar(subString, inicio, linea);
 					//Se imprime la respectiva ubicación del separador
 					//System.out.println(s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador");
-					texto = texto + s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador\n";
+					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
 					//Operaciones varias para manejar el tamaño de la cadena a analizar
 					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
 						int y = 1;
@@ -239,7 +233,7 @@ public class SubCadena {
 						inicio = x + 1;
 						//Se imprime la respectiva ubicación del operador
 						//System.out.print(s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x );
-						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x ;
+						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
 						definir(s);
 					}else {
 						//Si el operador tiene un solo caracter.
@@ -252,7 +246,7 @@ public class SubCadena {
 						inicio = x + 1;
 						//Se imprime la respectiva ubicación del operador
 						//System.out.print(s.charAt(x) + "\t\t\t" + linea + ", " + x);
-						texto = texto + s.charAt(x) + "\t\t\t" + linea + ", " + x;
+						texto = texto + s.charAt(x) + "\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
 				}
@@ -267,11 +261,11 @@ public class SubCadena {
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
 			//System.out.print("\t\t\t\t\t\tComparador");
-			texto = texto + "\t\t\t\t\t\tComparador";
+			texto = texto + "\tComparador";
 		}
 		if(tipo3.contains(s)) {
 			//System.out.print("\t\t\t\tSeparador");
-			texto = texto + "\t\t\t\tSeparador";
+			texto = texto + "\tSeparador";
 		}
 		//System.out.println("");
 		texto = texto + "\n";
