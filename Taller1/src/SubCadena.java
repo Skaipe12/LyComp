@@ -20,6 +20,7 @@ public class SubCadena {
 	static ArrayList<Integer> numeros = new ArrayList<Integer>();
 	static ArrayList<String> expresiones = new ArrayList<String>();
 	static String texto;
+	static String texto2;
 	
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
@@ -266,137 +267,174 @@ public class SubCadena {
 	case "if": {
 		token = "CondIf";
 		tokenId = 1;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "if" + "\n";
 	}
 	case "(": {
 		token = "parentIzq";
 		tokenId = 2;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "(" + "\n";
 	}
 	
-	case "+": {
+	case ")": {
 		token = "opSuma";
 		tokenId = 3;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ")" + "\n";
 	}
 	case "-": {
 		token = "opResta";
 		tokenId = 4;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "-" + "\n";
 	}
 	
 	case ">=": {
 		token = "mayorIgual";
 		tokenId = 5;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ">=" + "\n";
 	}
 	
 	case "<=": {
 		token = "menorIgual";
 		tokenId = 6;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "<=" + "\n";
 	}
 	case ";": {
 		token = "puntoComa";
 		tokenId = 7;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ";" + "\n";
 	}
 	case "<": {
 		token = "menor";
 		tokenId = 8;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "<" + "\n";
 	}
 	case ">": {
 		token = "mayor";
 		tokenId = 9;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ">" + "\n";
 	}
 	case "while": {
 		token = "condWhile";
 		tokenId = 10;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "while" + "\n";
 	}
 	case "{": {
 		token = "llaveIzq";
 		tokenId = 11;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "{" + "\n";
 	}
 	case "}": {
 		token = "llaveDer";
 		tokenId = 12;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "}" + "\n";
 	}
 	case "[": {
 		token = "corcheteIzq";
 		tokenId = 13;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "[" + "\n";
 	}
 	case "]": {
 		token = "corcheteDer";
 		tokenId = 14;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "]" + "\n";
 	}
 	case ":": {
 		token = "dosPuntos";
 		tokenId = 15;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ":" + "\n";
 	}
 	case " ": {
 		token = "espacio";
 		tokenId = 16;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + " " + "\n";
 	}
 	case "\t": {
 		token = "tabulador";
 		tokenId = 17;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "\t" + "\n";
 	}
 	
 	case "=": {
 		token = "Operadorigual";
 		tokenId = 18;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "=" + "\n";
 	}
 	case "==": {
 		token = "OperadorigualIgual";
 		tokenId = 19;
+		texto2 = texto2 + token + "\t" + tokenId + "\t\t" +"==" + "\n";
 	}
 	case "*": {
 		token = "OperadorMultiplicacion";
 		tokenId = 20;
+		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "*" + "\n";
 	}
 	case "/": {
 		token = "OperadorDiv";
 		tokenId = 21;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "/" + "\n";
 	}
 	case "%": {
 		token = "OperadorMod";
 		tokenId = 22;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "%" + "\n";
 	}
 	case "+=": {
 		token = "opMasIgual";
 		tokenId = 23;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+=" + "\n";
 	}
 	case "-=": {
 		token = "opMenosIgual";
 		tokenId = 24;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "-=" + "\n";
 	}
 	case "/=": {
 		token = "opDivisonIgual";
 		tokenId = 25;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "/=" + "\n";
 	}
 	case "*=": {
 		token = "OperadorMultpIgual";
 		tokenId = 26;
+		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "*=" + "\n";
 	}
 	case "++": {
 		token = "OperadorDobleMas";
 		tokenId = 27;
+		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "++" + "\n";
 	}
 	
 	case "--": {
 		token = "OperadorDobleMenos";
 		tokenId = 28;
+		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "--" + "\n";
 	}
 	
 	case "&&": {
 		token = "comparador&&";
 		tokenId = 29;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" +"&&" + "\n";
 	}
 	
 	case "&": {
 		token = "comparador&";
 		tokenId = 29;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "&" + "\n";
 	}
 	case "||": {
 		token = "comparador||";
 		tokenId = 30;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "||" + "\n";
+	}
+	case "+": {
+		token = "opSuma";
+		tokenId = 31;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
 	}
 	default:
 		token = "identificador";
-		tokenId = 31;
+		tokenId = 32;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
 	}
 		
 }

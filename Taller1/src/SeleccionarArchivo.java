@@ -65,6 +65,7 @@ public class SeleccionarArchivo extends JFrame{
 				JOptionPane.showMessageDialog(this, "Seleccionó " + archivo.getName());
 				SubCadena sc = new SubCadena(archivo);
 				contenido.setText(sc.texto);
+				contenido2.setText(sc.texto2);
 				
 			} else {
 				JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo");
