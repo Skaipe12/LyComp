@@ -17,7 +17,9 @@ public class SubCadena {
 	ArrayList<String> tipo2 = new ArrayList<String>();
 	ArrayList<String> tipo3 = new ArrayList<String>();
 	ArrayList<String> naturales = new ArrayList<String>();
-	ArrayList<Integer> numeros = new ArrayList<Integer>();
+	static ArrayList<Integer> numeros = new ArrayList<Integer>();
+	static ArrayList<String> expresiones = new ArrayList<String>();
+	
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
 	//los metodos fill estan detallados mas abajo.
@@ -35,9 +37,6 @@ public class SubCadena {
 			BufferedReader br = new BufferedReader(new FileReader(doc));
 			leer(br);
 			br.close();
-			for (int i = 0; i < numeros.size(); i++) {
-				System.out.println(numeros.get(i));
-			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,14 +131,44 @@ public class SubCadena {
 	public static void leer(BufferedReader doc) throws IOException {
 		String linea;
 		int contador = 0;
+		SubCadena sc = new SubCadena();
 		//Para hasta la primera linea nula
 		while((linea = doc.readLine()) != null) {
-			SubCadena sc = new SubCadena();
 			sc.cerebro(linea, contador);
 			contador++; 
 		}
+		
+		for (int i = 0; i < numeros.size(); i++) {
+			System.out.println(numeros.get(i));
+		}
+		for (int i = 0; i < expresiones.size(); i++) {
+			System.out.print(expresiones.get(i));
+		}
+		
 	}
-	//aaa323asd
+	
+	//falta add identificador con valor numerico.
+	public boolean analizarNumero(String token) {
+		int cont=0;
+		for (int i = 0; i < token.length(); i++) {
+			if(naturales.contains(token.charAt(i)+"")) {
+				cont++;
+			}
+		}
+		
+		if(cont==token.length()) {
+			if(token.compareTo("")==0) {
+				
+			} else {
+				numeros.add(Integer.parseInt(token));
+				return true;
+			}
+			
+		}
+		
+		return false;
+		
+	}
 
 	
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posición en la linea y la linea.
@@ -162,6 +191,7 @@ public class SubCadena {
 	
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
 	public void cerebro(String s, int linea) {
+		int cont=0;;
 		//La variable inicio se restaurará cada vez que se detecte un nuevo símbolo a analizar
 		int inicio = 0;
 		//Subcadena que se utilizara para manipular cada símbolo encontrado. Se envía a métodos externos.
@@ -173,7 +203,11 @@ public class SubCadena {
 			if(separadores.contains(s.charAt(x)+"") || operadores.contains(s.charAt(x) + "")) {
 				//Se identifica si es separador o operador
 				if(separadores.contains(s.charAt(x)+"")) {
+					
 					subString = s.substring(inicio, x);
+					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
+						expresiones.add(subString+" " +s.charAt(x));
+					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
 					//Se imprime la respectiva ubicación del separador
@@ -203,6 +237,10 @@ public class SubCadena {
 					}else {
 						//Si el operador tiene un solo caracter.
 						subString = s.substring(inicio, x);
+						if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
+							expresiones.add(subString+" " +s.charAt(x));
+						}
+						
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
 						//Se imprime la respectiva ubicación del operador
@@ -243,10 +281,36 @@ public class SubCadena {
 //
 //	}
 //Plan de accion:
-//1. Crear ArrayList donde se guarden valores desde el 0-9
-//2. Crear un arraylist Numeros vacio, donde a medida que se lea el codigo, vaya guardando los numeros encontrados y los identificadores que tengan un valor numerico
-//3. Codigo para identificar operaciones aritmeticas con la estructura numero + Operador + numero. Obviando espacios
+//1. Crear ArrayList donde se guarden valores desde el 0-9 =Done
+//2. Crear un arraylist Numeros vacio, donde a medida que se lea el codigo, vaya guardando los numeros encontrados y los identificadores que tengan un valor numerico = Done
+//3. Codigo para identificar operaciones aritmeticas con la estructura numero + Operador + numero. Obviando espacios = SemiDone (falta tokens con valores numericos)
 //4. Tabla de tokens, Preguntar.
 //5. Interfaz para mostrar lo que se muestra en consola.
+ /* 
+  * INPUT ACTUAL: 
+  * 3+1;
+pépe
+brayanb
+brayanb
+huevos 23
+556*3689=0;
+	public void buscar(String s, int x, int linea) {
+		if(s.equals("")) {
+		}else if(find.contain(s)) {
+			System.out.println(s + " posicion: " + linea + ", " + x);
+		}else if(!identificadores.contains(s)) {
+			identificadores.add(s);
+			System.out.println("Identificador: " + s + " Posicion: " + linea + ", " + x + " Tipo 1");
+
+		}else if(identificadores.contains(s)) {
+			System.out.println("Identificador: " + s + " Posicion:" + linea + ", " + x + " Tipo 1");
+>
+=
+
+		}
+  * 
+  * 
+  * 
+  * */
 
 }
