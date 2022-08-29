@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SubCadena {
 	
 	
-	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java.
+	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java, contadores y textos de output.
 	ArrayList<String> separadores = new ArrayList<String>();
 	ArrayList<String> operadores = new ArrayList<String>();
 	ArrayList<String> identificadores = new ArrayList<String>();
@@ -174,16 +174,13 @@ public class SubCadena {
 		if(s.equals("")) {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada");
 			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador");
 			texto = texto + s + "\t" + linea + ", " + x + "\tidentificador";
 			//Si sí lo tiene, imprime su ubicación-
 		}else if(identificadores.contains(s)) {
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador");
 			texto = texto + s + "\t" + linea + ", " + x + "\tIdentificador";
 		}
 		texto = texto + "\n";
@@ -211,8 +208,7 @@ public class SubCadena {
 					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
-					//Se imprime la respectiva ubicación del separador
-					//System.out.println(s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador");
+					//Se agrega la respectiva ubicación del separador
 					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
 					//Operaciones varias para manejar el tamaño de la cadena a analizar
 					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
@@ -233,8 +229,7 @@ public class SubCadena {
 						buscar(subString, inicio, linea);
 						x++;
 						inicio = x + 1;
-						//Se imprime la respectiva ubicación del operador
-						//System.out.print(s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x );
+						//Se agrega la respectiva ubicación del operador
 						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
 						definir(s);
 					}else {
@@ -246,8 +241,7 @@ public class SubCadena {
 						
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
-						//Se imprime la respectiva ubicación del operador
-						//System.out.print(s.charAt(x) + "\t\t\t" + linea + ", " + x);
+						//Se agrega la respectiva ubicación del operador
 						texto = texto + s.charAt(x) + "\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
@@ -259,7 +253,7 @@ public class SubCadena {
 		buscar(subString, inicio, linea);	
 	}
 	
-	
+	//Switch case para identificar correctamente el token y su id
 	private void clasificarToken(String lexema) {
 	int tokenId=0;
 	String token;
@@ -431,22 +425,25 @@ public class SubCadena {
 		tokenId = 31;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
 	}
+	//Debido a que hay 31 tokens predefinidos, el resto serian identificadores, por lo que se empiezan a contar desde 31
 	default:
 		if(lexema == "") {
 			
 		} else {
-		if(identificadores.contains(lexema)) {
-			token = "Identificador";
-			tokenId = identificadores.indexOf(lexema)+33;
-		} else {
-			
-			token = "identificador";
-			tokenId += contTokenIdent;
-			contTokenIdent++;
+			//Se verifica que el identificador haya sido usado anteriormente
+			if(identificadores.contains(lexema)) {
+				//El id seria su posicion en el array mas los 31 tokens anteriores
+				token = "Identificador";
+				tokenId = identificadores.indexOf(lexema)+32;
+			} else {
+				//Si no se habia usado el identificador anteriormente, se hace uso de un contador
+				token = "identificador";
+				tokenId += contTokenIdent;
+				contTokenIdent++;
 		}
-		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
+			texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
+		}
 	}
-		}
 		
 }
 
@@ -454,14 +451,11 @@ public class SubCadena {
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
-			//System.out.print("\t\t\t\t\t\tComparador");
 			texto = texto + "\tComparador";
 		}
 		if(tipo3.contains(s)) {
-			//System.out.print("\t\t\t\tSeparador");
 			texto = texto + "\tSeparador";
 		}
-		//System.out.println("");
 		texto = texto + "\n";
 	}
 
