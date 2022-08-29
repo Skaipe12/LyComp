@@ -19,6 +19,7 @@ public class SubCadena {
 	ArrayList<String> naturales = new ArrayList<String>();
 	static ArrayList<Integer> numeros = new ArrayList<Integer>();
 	static ArrayList<String> expresiones = new ArrayList<String>();
+	static String texto;
 	
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
@@ -73,7 +74,7 @@ public class SubCadena {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
 		temp.add('"'+""); temp.add(","); temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); 
-		temp.add("\\u0009"); temp.add(":");
+		temp.add("\t"); temp.add(":");
 		return temp;
 	}
 	
@@ -144,6 +145,7 @@ public class SubCadena {
 		for (int i = 0; i < expresiones.size(); i++) {
 			System.out.print(expresiones.get(i));
 		}
+		System.out.println(texto);
 		
 	}
 	
@@ -177,16 +179,19 @@ public class SubCadena {
 		if(s.equals("")) {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
-			System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada");
+			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada");
+			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada";
 			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
-			System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador");
+			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador");
+			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador";
 			//Si sí lo tiene, imprime su ubicación-
 		}else if(identificadores.contains(s)) {
-			System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador");
-
+			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador");
+			texto = texto + s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador";
 		}
+		texto = texto + "\n";
 	}
 	
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
@@ -211,7 +216,8 @@ public class SubCadena {
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
 					//Se imprime la respectiva ubicación del separador
-					System.out.println(s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador");
+					//System.out.println(s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador");
+					texto = texto + s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador\n";
 					//Operaciones varias para manejar el tamaño de la cadena a analizar
 					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
 						int y = 1;
@@ -232,7 +238,8 @@ public class SubCadena {
 						x++;
 						inicio = x + 1;
 						//Se imprime la respectiva ubicación del operador
-						System.out.print(s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x );
+						//System.out.print(s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x );
+						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x ;
 						definir(s);
 					}else {
 						//Si el operador tiene un solo caracter.
@@ -244,7 +251,8 @@ public class SubCadena {
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
 						//Se imprime la respectiva ubicación del operador
-						System.out.print(s.charAt(x) + "\t\t\t" + linea + ", " + x);
+						//System.out.print(s.charAt(x) + "\t\t\t" + linea + ", " + x);
+						texto = texto + s.charAt(x) + "\t\t\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
 				}
@@ -258,12 +266,15 @@ public class SubCadena {
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
-			System.out.print("\t\t\t\t\t\tComparador");
+			//System.out.print("\t\t\t\t\t\tComparador");
+			texto = texto + "\t\t\t\t\t\tComparador";
 		}
 		if(tipo3.contains(s)) {
-			System.out.print("\t\t\t\tSeparador");
+			//System.out.print("\t\t\t\tSeparador");
+			texto = texto + "\t\t\t\tSeparador";
 		}
-		System.out.println("");
+		//System.out.println("");
+		texto = texto + "\n";
 	}
 
 	//Main

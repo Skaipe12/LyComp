@@ -40,10 +40,13 @@ public class SeleccionarArchivo extends JFrame{
 		lblTokensTable.setBounds(10, 341, 161, 14);
 		getContentPane().add(lblTokensTable);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(32, 120, 503, 198);
+		getContentPane().add(scrollPane);
+		
 		JTextArea contenido = new JTextArea();
 		contenido.setEditable(false);
-		contenido.setBounds(20, 107, 420, 224);
-		getContentPane().add(contenido);
+		scrollPane.setViewportView(contenido);
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
 		//Expresión lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {
@@ -52,6 +55,7 @@ public class SeleccionarArchivo extends JFrame{
 				File archivo = jfcSelectorArchivo.getSelectedFile();
 				JOptionPane.showMessageDialog(this, "Seleccionó " + archivo.getName());
 				SubCadena sc = new SubCadena(archivo);
+				contenido.setText(sc.texto);
 				
 			} else {
 				JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo");
