@@ -21,11 +21,12 @@ public class SeleccionarArchivo extends JFrame{
 
 	private static final long serialVersionUID = -1440264901664686208L;
 	private JButton btnSeleccionarArchivo;
+	private JTextArea contenido2;
 	
 	public SeleccionarArchivo() throws HeadlessException {
 		super("Uso JFileChooser");
 		setPreferredSize(new Dimension(600, 600));
-		getContentPane().setSize(new Dimension(300, 300));
+		getContentPane().setSize(new Dimension(300, 400));
 		getContentPane().setLayout(null);
 		
 		btnSeleccionarArchivo = new JButton("Seleccionar archivo ...");
@@ -47,6 +48,14 @@ public class SeleccionarArchivo extends JFrame{
 		JTextArea contenido = new JTextArea();
 		contenido.setEditable(false);
 		scrollPane.setViewportView(contenido);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(32, 370, 503, 198);
+		getContentPane().add(scrollPane_1);
+		
+		contenido2 = new JTextArea();
+		contenido2.setEditable(false);
+		scrollPane_1.setViewportView(contenido2);
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
 		//Expresión lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {
@@ -65,7 +74,7 @@ public class SeleccionarArchivo extends JFrame{
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
-		setSize(494,409);
+		setSize(605,670);
 	}
 	
 	public static void main(String[] args) {
