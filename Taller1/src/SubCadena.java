@@ -204,6 +204,7 @@ public class SubCadena {
 				if(separadores.contains(s.charAt(x)+"")) {
 					
 					subString = s.substring(inicio, x);
+					clasificarToken(subString);
 					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
 						expresiones.add(subString+" " +s.charAt(x));
 					}
@@ -256,6 +257,149 @@ public class SubCadena {
 		subString = s.substring(inicio, s.length());
 		buscar(subString, inicio, linea);	
 	}
+	
+	
+	private void clasificarToken(String lexema) {
+	int tokenId;
+	String token;
+		switch (lexema) {
+	case "if": {
+		token = "CondIf";
+		tokenId = 1;
+	}
+	case "(": {
+		token = "parentIzq";
+		tokenId = 2;
+	}
+	
+	case "+": {
+		token = "opSuma";
+		tokenId = 3;
+	}
+	case "-": {
+		token = "opResta";
+		tokenId = 4;
+	}
+	
+	case ">=": {
+		token = "mayorIgual";
+		tokenId = 5;
+	}
+	
+	case "<=": {
+		token = "menorIgual";
+		tokenId = 6;
+	}
+	case ";": {
+		token = "puntoComa";
+		tokenId = 7;
+	}
+	case "<": {
+		token = "menor";
+		tokenId = 8;
+	}
+	case ">": {
+		token = "mayor";
+		tokenId = 9;
+	}
+	case "while": {
+		token = "condWhile";
+		tokenId = 10;
+	}
+	case "{": {
+		token = "llaveIzq";
+		tokenId = 11;
+	}
+	case "}": {
+		token = "llaveDer";
+		tokenId = 12;
+	}
+	case "[": {
+		token = "corcheteIzq";
+		tokenId = 13;
+	}
+	case "]": {
+		token = "corcheteDer";
+		tokenId = 14;
+	}
+	case ":": {
+		token = "dosPuntos";
+		tokenId = 15;
+	}
+	case " ": {
+		token = "espacio";
+		tokenId = 16;
+	}
+	case "\t": {
+		token = "tabulador";
+		tokenId = 17;
+	}
+	
+	case "=": {
+		token = "Operadorigual";
+		tokenId = 18;
+	}
+	case "==": {
+		token = "OperadorigualIgual";
+		tokenId = 19;
+	}
+	case "*": {
+		token = "OperadorMultiplicacion";
+		tokenId = 20;
+	}
+	case "/": {
+		token = "OperadorDiv";
+		tokenId = 21;
+	}
+	case "%": {
+		token = "OperadorMod";
+		tokenId = 22;
+	}
+	case "+=": {
+		token = "opMasIgual";
+		tokenId = 23;
+	}
+	case "-=": {
+		token = "opMenosIgual";
+		tokenId = 24;
+	}
+	case "/=": {
+		token = "opDivisonIgual";
+		tokenId = 25;
+	}
+	case "*=": {
+		token = "OperadorMultpIgual";
+		tokenId = 26;
+	}
+	case "++": {
+		token = "OperadorDobleMas";
+		tokenId = 27;
+	}
+	
+	case "--": {
+		token = "OperadorDobleMenos";
+		tokenId = 28;
+	}
+	
+	case "&&": {
+		token = "comparador&&";
+		tokenId = 29;
+	}
+	
+	case "&": {
+		token = "comparador&";
+		tokenId = 29;
+	}
+	case "||": {
+		token = "comparador||";
+		tokenId = 30;
+	}
+	default:
+		token = "identificador";
+		tokenId = 31;
+	}
+		
+}
 	
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
