@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
 
 
 public class SeleccionarArchivo extends JFrame{
@@ -22,6 +23,7 @@ public class SeleccionarArchivo extends JFrame{
 	private static final long serialVersionUID = -1440264901664686208L;
 	private JButton btnSeleccionarArchivo;
 	private JTextArea contenido2;
+	private JButton btnSalir;
 	
 	public SeleccionarArchivo() throws HeadlessException {
 		super("Uso JFileChooser");
@@ -56,6 +58,15 @@ public class SeleccionarArchivo extends JFrame{
 		contenido2 = new JTextArea();
 		contenido2.setEditable(false);
 		scrollPane_1.setViewportView(contenido2);
+		
+		btnSalir = new JButton("SALIR");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnSalir.setBounds(485, 11, 89, 23);
+		getContentPane().add(btnSalir);
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
 		//Expresión lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {

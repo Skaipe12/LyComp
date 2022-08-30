@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//Versión del archivo que no se envió
+
 
 public class SubCadena {
 	
@@ -133,18 +133,19 @@ public class SubCadena {
 			sc.cerebro(linea, contador);
 			contador++; 
 		}
-		
+		System.out.println("Numeros encontrados: ");
 		for (int i = 0; i < numeros.size(); i++) {
 			System.out.println(numeros.get(i));
 		}
+		System.out.println("Expresiones encontradas: ");
 		for (int i = 0; i < expresiones.size(); i++) {
 			System.out.print(expresiones.get(i));
 		}
+		System.out.println("");
 		System.out.println(texto);
 		
 	}
 	
-	//falta add identificador con valor numerico.
 	public boolean analizarNumero(String token) {
 		int cont=0;
 		for (int i = 0; i < token.length(); i++) {
@@ -207,7 +208,7 @@ public class SubCadena {
 					subString = s.substring(inicio, x);
 					clasificarToken(subString);
 					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
-						expresiones.add(subString+" " +s.charAt(x));
+						expresiones.add(subString +s.charAt(x));
 					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
@@ -437,7 +438,7 @@ public class SubCadena {
 		} else {
 		if(identificadores.contains(lexema)) {
 			token = "Identificador";
-			tokenId = identificadores.indexOf(lexema)+33;
+			tokenId = identificadores.indexOf(lexema)+32;
 		} else {
 			
 			token = "identificador";
