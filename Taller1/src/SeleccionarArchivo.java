@@ -68,18 +68,18 @@ public class SeleccionarArchivo extends JFrame{
 		btnSalir.setBounds(485, 11, 89, 23);
 		getContentPane().add(btnSalir);
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
-		//Expresión lambda
+		//ExpresiÃ³n lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {
 			int resultado = jfcSelectorArchivo.showOpenDialog(this);
 			if(resultado == JFileChooser.APPROVE_OPTION) {
 				File archivo = jfcSelectorArchivo.getSelectedFile();
-				JOptionPane.showMessageDialog(this, "Seleccionó " + archivo.getName());
+				JOptionPane.showMessageDialog(this, "SeleccionÃ³ " + archivo.getName());
 				SubCadena sc = new SubCadena(archivo);
 				contenido.setText(sc.texto);
 				contenido2.setText(sc.texto2);
 				
 			} else {
-				JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo");
+				JOptionPane.showMessageDialog(this, "No se seleccionÃ³ ningÃºn archivo");
 			}
 		});
 		

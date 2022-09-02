@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SubCadena {
 	
 	
-	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java.
+	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java, contadores y textos de output.
 	ArrayList<String> separadores = new ArrayList<String>();
 	ArrayList<String> operadores = new ArrayList<String>();
 	ArrayList<String> identificadores = new ArrayList<String>();
@@ -62,9 +62,9 @@ public class SubCadena {
 		return temp;
 	}
 	
-	//Método que llena la lista de separadores simbolos de tipo separador. 
+	//Mï¿½todo que llena la lista de separadores simbolos de tipo separador. 
 	public ArrayList<String> fillSeparadores() {
-		//Se crea una lista temporal para añadir los separadores, y se retorna temp para que pueda ser asignado a la respectiva lista
+		//Se crea una lista temporal para aï¿½adir los separadores, y se retorna temp para que pueda ser asignado a la respectiva lista
 		//																						de separadores.		
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
@@ -73,7 +73,7 @@ public class SubCadena {
 		return temp;
 	}
 	
-	//Para la identificación de los tipos, que en nuestro caso sigue la la jerarquia: 
+	//Para la identificaciï¿½n de los tipos, que en nuestro caso sigue la la jerarquia: 
 //	tipo 1: identificadores
 //	tipo 2: comparadores
 //	tipo 3: separadores
@@ -100,7 +100,7 @@ public class SubCadena {
 	}
 	
 	
-	//Se crea una lista temporal para añadir los Operadores, y se retorna temp para que pueda ser asignado a la respectiva lista
+	//Se crea una lista temporal para aï¿½adir los Operadores, y se retorna temp para que pueda ser asignado a la respectiva lista
 			//																						de Operadores.		
 	public ArrayList<String> fillOperadores(){
 		ArrayList<String> temp = new ArrayList<String>();
@@ -112,7 +112,7 @@ public class SubCadena {
 		return temp;
 	}
 	
-	//Se utiliza este metodo para identificar algunas palabras clave. El proceso de retorno y su asignación en el constructor es similar a
+	//Se utiliza este metodo para identificar algunas palabras clave. El proceso de retorno y su asignaciï¿½n en el constructor es similar a
 	//																							Operadores y Separadores
 	public ArrayList<String> fillFind(){
 		ArrayList<String> temp = new ArrayList<String>();
@@ -123,7 +123,7 @@ public class SubCadena {
 	}
 	
 	
-	//Metodo para leer el fichero, recibe un BufferedReader que manda cada linea al método cerebro el cual procesa la cadena.
+	//Metodo para leer el fichero, recibe un BufferedReader que manda cada linea al mï¿½todo cerebro el cual procesa la cadena.
 	public static void leer(BufferedReader doc) throws IOException {
 		String linea;
 		int contador = 0;
@@ -169,22 +169,20 @@ public class SubCadena {
 	}
 
 	
-	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posición en la linea y la linea.
+	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posiciï¿½n en la linea y la linea.
 	public void buscar(String s, int x, int linea) {
-		//Si hay una cadena vacía no hace nada
+		//Si hay una cadena vacï¿½a no hace nada
 		if(s.equals("")) {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tPalabra Reservada");
+			//texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tidentificador");
 			texto = texto + s + "\t" + linea + ", " + x + "\tidentificador";
-			//Si sí lo tiene, imprime su ubicación-
+			//Si sï¿½ lo tiene, imprime su ubicaciï¿½n-
 		}else if(identificadores.contains(s)) {
-			//System.out.println(s + "\t\t\t" + linea + ", " + x + "\t\t\tIdentificador");
 			texto = texto + s + "\t" + linea + ", " + x + "\tIdentificador";
 		}
 		texto = texto + "\n";
@@ -193,14 +191,14 @@ public class SubCadena {
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
 	public void cerebro(String s, int linea) {
 		int cont=0;;
-		//La variable inicio se restaurará cada vez que se detecte un nuevo símbolo a analizar
+		//La variable inicio se restaurarï¿½ cada vez que se detecte un nuevo sï¿½mbolo a analizar
 		int inicio = 0;
-		//Subcadena que se utilizara para manipular cada símbolo encontrado. Se envía a métodos externos.
+		//Subcadena que se utilizara para manipular cada sï¿½mbolo encontrado. Se envï¿½a a mï¿½todos externos.
 		String subString;
 		//Este for analiza cada linea del fichero, esta linea llega desde el parametro .
 		for(int x = 0; x < s.length(); x++) {
 			
-			//Se pregunta si es separador o operador (ambos separan). Esto nos define un símbolo completo para analizar.
+			//Se pregunta si es separador o operador (ambos separan). Esto nos define un sï¿½mbolo completo para analizar.
 			if(separadores.contains(s.charAt(x)+"") || operadores.contains(s.charAt(x) + "")) {
 				//Se identifica si es separador o operador
 				if(separadores.contains(s.charAt(x)+"")) {
@@ -212,10 +210,9 @@ public class SubCadena {
 					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
-					//Se imprime la respectiva ubicación del separador
-					//System.out.println(s.charAt(x) + "\t\t\t" + linea + ", " + x + "\t\t\tSeparador");
+					//Se agrega la respectiva ubicaciï¿½n del separador
 					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
-					//Operaciones varias para manejar el tamaño de la cadena a analizar
+					//Operaciones varias para manejar el tamaï¿½o de la cadena a analizar
 					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
 						int y = 1;
 						while(x + y < s.length() && separadores.contains(s.charAt(x + y)+"")) {
@@ -234,8 +231,7 @@ public class SubCadena {
 						buscar(subString, inicio, linea);
 						x++;
 						inicio = x + 1;
-						//Se imprime la respectiva ubicación del operador
-						//System.out.print(s.charAt(x - 1) + s.charAt(x) + "\t\t\t" + linea + ", " + x );
+						//Se agrega la respectiva ubicaciï¿½n del operador
 						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
 						definir(s);
 					}else {
@@ -247,8 +243,7 @@ public class SubCadena {
 						
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
-						//Se imprime la respectiva ubicación del operador
-						//System.out.print(s.charAt(x) + "\t\t\t" + linea + ", " + x);
+						//Se agrega la respectiva ubicaciï¿½n del operador
 						texto = texto + s.charAt(x) + "\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
@@ -260,7 +255,7 @@ public class SubCadena {
 		buscar(subString, inicio, linea);	
 	}
 	
-	
+	//Switch case para identificar correctamente el token y su id
 	private void clasificarToken(String lexema) {
 	int tokenId=0;
 	String token;
@@ -432,6 +427,7 @@ public class SubCadena {
 		tokenId = 31;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
 	}
+	//Debido a que hay 31 tokens predefinidos, el resto serian identificadores, por lo que se empiezan a contar desde 31
 	default:
 		if(lexema == "") {
 			
@@ -445,7 +441,6 @@ public class SubCadena {
 			tokenId += contTokenIdent;
 			contTokenIdent++;
 		}
-		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
 	}
 		}
 		
@@ -455,14 +450,11 @@ public class SubCadena {
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
-			//System.out.print("\t\t\t\t\t\tComparador");
 			texto = texto + "\tComparador";
 		}
 		if(tipo3.contains(s)) {
-			//System.out.print("\t\t\t\tSeparador");
 			texto = texto + "\tSeparador";
 		}
-		//System.out.println("");
 		texto = texto + "\n";
 	}
 
@@ -489,7 +481,7 @@ public class SubCadena {
  /* 
   * INPUT ACTUAL: 
   * 3+1;
-pépe
+pï¿½pe
 brayanb
 brayanb
 huevos 23
