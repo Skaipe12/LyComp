@@ -10,12 +10,13 @@ public class SubCadena {
 	
 	
 	//Se inicializan las listas contenedoras de todos los simbolos a identificar en lenguaje java, contadores y textos de output.
-	ArrayList<String> separadores = new ArrayList<String>();
-	ArrayList<String> operadores = new ArrayList<String>();
+	ArrayList<ArrayList<String>> separadores = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> operadores = new ArrayList<ArrayList<String>>();
 	ArrayList<String> identificadores = new ArrayList<String>();
-	ArrayList<String> find = new ArrayList<String>();
-	ArrayList<String> tipo2 = new ArrayList<String>();
-	ArrayList<String> tipo3 = new ArrayList<String>();
+	ArrayList<ArrayList<String>> palabraReservada = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> comparadores = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> tipo3 = new ArrayList<ArrayList<String>>();
+	ArrayList<String> opAritmeticos = new ArrayList<String>();
 	ArrayList<String> naturales = new ArrayList<String>();
 	static ArrayList<Integer> numeros = new ArrayList<Integer>();
 	static ArrayList<String> expresiones = new ArrayList<String>();
@@ -30,10 +31,11 @@ public class SubCadena {
 		super();
 		this.separadores = fillSeparadores();
 		this.operadores = fillOperadores();
-		this.find = fillFind();
-		this.tipo2 = fillTipo2();
+		this.palabraReservada = fillReservadas();
+		this.comparadores = fillComparadores();
 		this.tipo3 = fillTipo3();
 		this.naturales = fillNaturales();
+		this.opAritmeticos = fillOpAritmeticos();
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(doc));
@@ -49,62 +51,95 @@ public class SubCadena {
 		super();
 		this.separadores = fillSeparadores();
 		this.operadores = fillOperadores();
-		this.find = fillFind();
-		this.tipo2 = fillTipo2();
+		this.palabraReservada = fillReservadas();
+		this.comparadores = fillComparadores();
 		this.tipo3 = fillTipo3();
 		this.naturales = fillNaturales();
+		this.opAritmeticos = fillOpAritmeticos();
 		
+	}
+	
+	public ArrayList<ArrayList<String>> fillSeparadores() {																						
+		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> lexema = new ArrayList<String>();
+		ArrayList<ArrayList<String>> contenedor = new ArrayList<ArrayList<String>>();
+		temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");temp.add('"'+""); temp.add(","); temp.add(";"); 
+		temp.add("."); temp.add("("); temp.add(")"); temp.add("\t"); temp.add(":");
+		lexema.add("SeparadorEsp"); lexema.add("LlaveIZq"); lexema.add("LlaveDer"); lexema.add("CorcheteIzq"); lexema.add("CorcheteDer");
+		lexema.add("SeparadorComillas"); lexema.add("SeparadorComa"); lexema.add("SeparadorPuntoComa"); lexema.add("SeparadorPunto"); 
+		lexema.add("ParentIzq"); lexema.add("ParentDer"); lexema.add("SeparadorTab"); lexema.add("SeparadorDosPuntos");
+		contenedor.add(temp); contenedor.add(lexema);
+		return contenedor;
+	}
+	
+	public ArrayList<ArrayList<String>> fillOperadores(){
+		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> lexema = new ArrayList<String>();
+		ArrayList<ArrayList<String>> contenedor = new ArrayList<ArrayList<String>>();
+		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%"); temp.add("="); temp.add("+="); temp.add("-="); temp.add("<="); 
+		temp.add(">="); temp.add("/="); temp.add("*="); temp.add("%="); temp.add(">"); temp.add("<"); temp.add("&&"); temp.add("||"); temp.add("&"); 
+		temp.add("|"); temp.add("++"); temp.add("--");
+		lexema.add("OperadorMas"); lexema.add("OperadorMenos"); lexema.add("OperadorMult"); lexema.add("OperadorDiv"); lexema.add("OperadorMod");
+		lexema.add("OperadorIgual"); lexema.add("OperadorMasIgual"); lexema.add("OperadorMenosIgual"); lexema.add("ComparadorMenorIgualQue"); 
+		lexema.add("ComparadorMayorIgualQue"); lexema.add("OperadorDivIgual"); lexema.add("OperadorMultIgual"); lexema.add("OperadorModIgual"); 
+		lexema.add("ComparadorMayorQue"); lexema.add("ComparadorMenorQue"); lexema.add("OperadorY"); lexema.add("OperadorO"); lexema.add("OperadorY"); 
+		lexema.add("OperadorO"); lexema.add("OperadorMasMas"); lexema.add("OperadorMenosMenos");
+		contenedor.add(temp); contenedor.add(lexema);
+		return contenedor;
+	}
+	
+	public ArrayList<ArrayList<String>> fillReservadas(){
+		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> lexema = new ArrayList<String>();
+		ArrayList<ArrayList<String>> contenedor = new ArrayList<ArrayList<String>>();
+		temp.add("while"); temp.add("for"); temp.add("if");
+		lexema.add("ReservadaWhile"); lexema.add("ReservadaFor"); lexema.add("ReservadaIf");
+		contenedor.add(temp); contenedor.add(lexema);
+		return contenedor;
+	}
+	
+	public ArrayList<ArrayList<String>> fillComparadores(){
+		ArrayList<String> tipo2 = new ArrayList<String>();
+		ArrayList<String> lexema = new ArrayList<String>();
+		ArrayList<ArrayList<String>> contenedor = new ArrayList<ArrayList<String>>();
+		tipo2.add("=="); tipo2.add(">=");tipo2.add("<="); tipo2.add(">"); tipo2.add("<"); tipo2.add("=");
+		tipo2.add("+"); tipo2.add("-"); tipo2.add("*"); tipo2.add("/"); tipo2.add("%");
+		lexema.add("ComparadorIgualQue"); lexema.add("ComparadorMayorIgualQue");lexema.add("ComparadorMenorIgualQue"); 
+		lexema.add("ComparadorMayorQue"); lexema.add("ComparadorMenorQue"); lexema.add("OperadorIgual"); lexema.add("OperadorMas"); 
+		lexema.add("OperadorMenos"); lexema.add("OperadorMult"); lexema.add("OperadorDiv"); lexema.add("OperadorMod");
+		contenedor.add(tipo2); contenedor.add(lexema);
+		return contenedor;
 	}
 	
 	public ArrayList<String> fillNaturales() {
 		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("0");temp.add("1");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
-		return temp;
-	}
-	 
-	public ArrayList<String> fillSeparadores() {	
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
-		temp.add('"'+""); temp.add(","); temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); 
-		temp.add("\t"); temp.add(":");
+		temp.add("0");temp.add("1");temp.add("2");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
 		return temp;
 	}
 	
-	public ArrayList<String> fillTipo2(){
-		ArrayList<String> tipo2 = new ArrayList<String>();
-		tipo2.add("=="); tipo2.add(">=");tipo2.add("<="); tipo2.add(">"); tipo2.add("<"); tipo2.add("=");
-		tipo2.add("+"); tipo2.add("-"); tipo2.add("*"); tipo2.add("/"); tipo2.add("%");
-		return tipo2;
+	public ArrayList<ArrayList<String>> fillTipo3(){
+		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> lexema = new ArrayList<String>();
+		ArrayList<ArrayList<String>> contenedor = new ArrayList<ArrayList<String>>();
+		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%"); temp.add("="); temp.add("+="); temp.add("-="); temp.add("<="); 
+		temp.add(">="); temp.add("/="); temp.add("*="); temp.add("%="); temp.add(">"); temp.add("<"); temp.add("&&"); temp.add("||"); temp.add("&"); 
+		temp.add("|"); temp.add("++"); temp.add("--");temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]"); temp.add(","); 
+		temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); temp.add("/t"); temp.add("==");
+		lexema.add("OperadorMas"); lexema.add("OperadorMenos"); lexema.add("OperadorMult"); lexema.add("OperadorDiv"); lexema.add("OperadorMod");
+		lexema.add("OperadorIgual"); lexema.add("OperadorMasIgual"); lexema.add("OperadorMenosIgual"); lexema.add("ComparadorMenorIgualQue"); 
+		lexema.add("ComparadorMayorIgualQue"); lexema.add("OperadorDivIgual"); lexema.add("OperadorMultIgual"); lexema.add("OperadorModIgual"); 
+		lexema.add("ComparadorMayorQue"); lexema.add("ComparadorMenorQue"); lexema.add("OperadorY"); lexema.add("OperadorO"); lexema.add("OperadorY"); 
+		lexema.add("OperadorO"); lexema.add("OperadorMasMas"); lexema.add("OperadorMenosMenos");lexema.add("SeparadorEsp"); lexema.add("LlaveIZq"); 
+		lexema.add("LlaveDer"); lexema.add("CorcheteIzq"); lexema.add("CorcheteDer"); lexema.add("SeparadorComa"); lexema.add("SeparadorPuntoComa"); 
+		lexema.add("SeparadorPunto"); lexema.add("ParentIzq"); lexema.add("ParentDer"); lexema.add("SeparadorTab"); lexema.add("ComparadorIgualQue");
+		contenedor.add(temp); contenedor.add(lexema);
+		return contenedor;
 	}
 	
-	public ArrayList<String> fillTipo3(){
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%");
-		temp.add("="); temp.add("+="); temp.add("-="); temp.add("<="); temp.add(">=");
-		temp.add("/="); temp.add("*="); temp.add("%="); temp.add(">"); temp.add("<");
-		temp.add("&&"); temp.add("||"); temp.add("&"); temp.add("|"); temp.add("++");
-		temp.add("--");temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
-		temp.add(","); temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); temp.add("	"); temp.add("=="); temp.add(";");
-
-		return temp;
-	}
-	
-	public ArrayList<String> fillOperadores(){
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%");
-		temp.add("="); temp.add("+="); temp.add("-="); temp.add("<="); temp.add(">=");
-		temp.add("/="); temp.add("*="); temp.add("%="); temp.add(">"); temp.add("<");
-		temp.add("&&"); temp.add("||"); temp.add("&"); temp.add("|"); temp.add("++");
-		temp.add("--");
-		return temp;
-	}
-
-	public ArrayList<String> fillFind(){
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("while");
-		temp.add("for");
-		temp.add("if");
-		return temp;
+	public ArrayList<String> fillOpAritmeticos(){
+		ArrayList<String> tipo4 = new ArrayList<String>();
+		tipo4.add("="); tipo4.add("+"); tipo4.add("-"); tipo4.add("*"); tipo4.add("/"); tipo4.add("%");
+		return tipo4;
 	}
 	
 	
@@ -156,7 +191,7 @@ public class SubCadena {
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posici�n en la linea y la linea.
 	public void buscar(String s, int x, int linea) {
 		if(s.equals("")) {
-		}else if(find.contains(s)) {
+		}else if(palabraReservada.contains(s)) {
 			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
@@ -411,7 +446,7 @@ public class SubCadena {
 	
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
-		if(tipo2.contains(s)) {
+		if(comparadores.contains(s)) {
 			texto = texto + "\tComparador";
 		}
 		if(tipo3.contains(s)) {
