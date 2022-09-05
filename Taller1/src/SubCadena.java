@@ -191,7 +191,7 @@ public class SubCadena {
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posici�n en la linea y la linea.
 	public void buscar(String s, int x, int linea) {
 		if(s.equals("")) {
-		}else if(palabraReservada.contains(s)) {
+		}else if(palabraReservada.get(1).contains(s)) {
 			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
@@ -208,8 +208,8 @@ public class SubCadena {
 		int inicio = 0;
 		String subString;
 		for(int x = 0; x < s.length(); x++) {
-			if(separadores.contains(s.charAt(x)+"") || operadores.contains(s.charAt(x) + "")) {
-				if(separadores.contains(s.charAt(x)+"")) {
+			if(separadores.get(0).contains(s.charAt(x)+"") || operadores.get(0).contains(s.charAt(x) + "")) {
+				if(separadores.get(0).contains(s.charAt(x)+"")) {
 					
 					subString = s.substring(inicio, x);
 					clasificarToken(subString);
@@ -218,9 +218,9 @@ public class SubCadena {
 					}
 					buscar(subString, inicio, linea);
 					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
-					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
+					if(x + 1 < s.length() && separadores.get(0).contains(s.charAt(x + 1)+"")) {
 						int y = 1;
-						while(x + y < s.length() && separadores.contains(s.charAt(x + y)+"")) {
+						while(x + y < s.length() && separadores.get(0).contains(s.charAt(x + y)+"")) {
 							y++;
 						}
 						inicio = x + y;
@@ -229,7 +229,7 @@ public class SubCadena {
 						inicio = x + 1;
 					}
 				}else {
-					if(x + 1 < s.length() && operadores.contains(s.charAt(x + 1) + "")) {
+					if(x + 1 < s.length() && operadores.get(0).contains(s.charAt(x + 1) + "")) {
 						subString = s.substring(inicio, x);
 						buscar(subString, inicio, linea);
 						x++;
@@ -446,10 +446,10 @@ public class SubCadena {
 	
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
-		if(comparadores.contains(s)) {
+		if(comparadores.get(0).contains(s)) {
 			texto = texto + "\tComparador";
 		}
-		if(tipo3.contains(s)) {
+		if(tipo3.get(0).contains(s)) {
 			texto = texto + "\tSeparador";
 		}
 		texto = texto + "\n";
