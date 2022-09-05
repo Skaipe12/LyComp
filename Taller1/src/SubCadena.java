@@ -191,33 +191,35 @@ public class SubCadena {
 	//Metodo para buscar o agregar un identificador, recibe la cadena a buscar, x el cual es su posici�n en la linea y la linea.
 	public void buscar(String s, int x, int linea) {
 		if(s.equals("")) {
-		}else if(palabraReservada.get(1).contains(s)) {
+		}else if(palabraReservada.get(0).contains(s)) {
 			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
+			texto2 = texto2 + s + "\t\t" + "tokenID" + "\t\t" + palabraReservada.get(1).get(palabraReservada.get(0).indexOf(s)) + "\n";  
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
 			texto = texto + s + "\t" + linea + ", " + x + "\tidentificador";
+			texto2 = texto2 + s + "\t\t" + "tokenId" + "\t\t" + "Identificador" + s + "\n";
 		}else if(identificadores.contains(s)) {
 			texto = texto + s + "\t" + linea + ", " + x + "\tIdentificador";
+			texto2 = texto2 + s + "\t\t" + "tokenId" + "\t\t" + "Identificador" + s + "\n";
 		}
 		texto = texto + "\n";
 	}
 	
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
 	public void cerebro(String s, int linea) {
-		int cont=0;;
 		int inicio = 0;
 		String subString;
 		for(int x = 0; x < s.length(); x++) {
 			if(separadores.get(0).contains(s.charAt(x)+"") || operadores.get(0).contains(s.charAt(x) + "")) {
 				if(separadores.get(0).contains(s.charAt(x)+"")) {
-					
 					subString = s.substring(inicio, x);
-					clasificarToken(subString);
+					//clasificarToken(subString);
 					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
 						expresiones.add(subString +s.charAt(x));
 					}
 					buscar(subString, inicio, linea);
 					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
+					texto2 = texto2 + s.charAt(x) + "\t\t" + "tokenId" + "\t\t" + "lexema" + "\n";
 					if(x + 1 < s.length() && separadores.get(0).contains(s.charAt(x + 1)+"")) {
 						int y = 1;
 						while(x + y < s.length() && separadores.get(0).contains(s.charAt(x + y)+"")) {
@@ -235,6 +237,7 @@ public class SubCadena {
 						x++;
 						inicio = x + 1;
 						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
+						texto2 = texto2 + s.charAt(x - 1) + s.charAt(x) + "\t\t" + "tokenId" + "\t\t" + "lexema" + "\n";
 						definir(s);
 					}else {
 						subString = s.substring(inicio, x);
@@ -245,6 +248,7 @@ public class SubCadena {
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
 						texto = texto + s.charAt(x) + "\t" + linea + ", " + x;
+						texto2 = texto2 + s.charAt(x) + "\t\t" + "tokenID" + "\t\t" + "lexema" + "\n";
 						definir(s.charAt(x) + "");
 					}
 				}
@@ -448,9 +452,11 @@ public class SubCadena {
 	public void definir(String s) {
 		if(comparadores.get(0).contains(s)) {
 			texto = texto + "\tComparador";
+			texto2 = texto2 + "\t\t" + "tokenId" + "\t\t" + comparadores.get(1).get(comparadores.get(0).indexOf(s)) + "\n";
 		}
 		if(tipo3.get(0).contains(s)) {
 			texto = texto + "\tSeparador";
+			texto2 = texto2 + "\t\t" + "tokenId" + "\t\t" + tipo3.get(1).get(tipo3.get(0).indexOf(s)) + "\n";
 		}
 		texto = texto + "\n";
 	}
