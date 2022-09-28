@@ -17,9 +17,10 @@ public class SubCadena {
 	ArrayList<String> tipo2 = new ArrayList<String>();
 	ArrayList<String> tipo3 = new ArrayList<String>();
 	ArrayList<String> naturales = new ArrayList<String>();
-	static ArrayList<Integer> numeros = new ArrayList<Integer>();
-	static ArrayList<String> expresiones = new ArrayList<String>();
-	static String texto;
+	 ArrayList<Integer> numeros = new ArrayList<Integer>();
+	 ArrayList<String> expresiones = new ArrayList<String>();
+	static String textInput;
+	static String textoSimbolos;
 	static String texto2;
 	static int contTokenIdent = 32;
 	
@@ -55,6 +56,8 @@ public class SubCadena {
 		this.naturales = fillNaturales();
 		
 	}
+	
+	
 	
 	public ArrayList<String> fillNaturales() {
 		ArrayList<String> temp = new ArrayList<String>();
@@ -130,19 +133,20 @@ public class SubCadena {
 		SubCadena sc = new SubCadena();
 		//Para hasta la primera linea nula
 		while((linea = doc.readLine()) != null) {
+			textInput += linea + "\n";
 			sc.cerebro(linea, contador);
 			contador++; 
 		}
 		System.out.println("Numeros encontrados: ");
-		for (int i = 0; i < numeros.size(); i++) {
-			System.out.println(numeros.get(i));
+		for (int i = 0; i < sc.numeros.size(); i++) {
+			System.out.println(sc.numeros.get(i));
 		}
 		System.out.println("Expresiones encontradas: ");
-		for (int i = 0; i < expresiones.size(); i++) {
-			System.out.print(expresiones.get(i));
+		for (int i = 0; i < sc.expresiones.size(); i++) {
+			System.out.print(sc.expresiones.get(i));
 		}
 		System.out.println("");
-		System.out.println(texto);
+		System.out.println(textoSimbolos);
 		
 	}
 	
@@ -176,16 +180,16 @@ public class SubCadena {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
 			//texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
-			texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
+			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
-			texto = texto + s + "\t" + linea + ", " + x + "\tidentificador";
+			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tidentificador";
 			//Si s� lo tiene, imprime su ubicaci�n-
 		}else if(identificadores.contains(s)) {
-			texto = texto + s + "\t" + linea + ", " + x + "\tIdentificador";
+			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tIdentificador";
 		}
-		texto = texto + "\n";
+		textoSimbolos = textoSimbolos + "\n";
 	}
 	
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
@@ -206,12 +210,12 @@ public class SubCadena {
 					subString = s.substring(inicio, x);
 					clasificarToken(subString);
 					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
-						expresiones.add(subString +s.charAt(x));
+						expresiones.add(subString +s.charAt(x)+"("+x+")" );
 					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
 					//Se agrega la respectiva ubicaci�n del separador
-					texto = texto + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
+					textoSimbolos = textoSimbolos + s.charAt(x) + "\t" + linea + ", " + x + "\tSeparador\n";
 					//Operaciones varias para manejar el tama�o de la cadena a analizar
 					if(x + 1 < s.length() && separadores.contains(s.charAt(x + 1)+"")) {
 						int y = 1;
@@ -232,19 +236,19 @@ public class SubCadena {
 						x++;
 						inicio = x + 1;
 						//Se agrega la respectiva ubicaci�n del operador
-						texto = texto + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
+						textoSimbolos = textoSimbolos + s.charAt(x - 1) + s.charAt(x) + "\t" + linea + ", " + x ;
 						definir(s);
 					}else {
 						//Si el operador tiene un solo caracter.
 						subString = s.substring(inicio, x);
 						if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
-							expresiones.add(subString+" " +s.charAt(x));
+							expresiones.add(subString+" " +s.charAt(x) +"("+x+")");
 						}
 						
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
 						//Se agrega la respectiva ubicaci�n del operador
-						texto = texto + s.charAt(x) + "\t" + linea + ", " + x;
+						textoSimbolos = textoSimbolos + s.charAt(x) + "\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
 				}
@@ -450,12 +454,12 @@ public class SubCadena {
 	//Metodo para definir el tipo explicado mas ariba
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
-			texto = texto + "\tComparador";
+			textoSimbolos = textoSimbolos + "\tComparador";
 		}
 		if(tipo3.contains(s)) {
-			texto = texto + "\tSeparador";
+			textoSimbolos = textoSimbolos + "\tSeparador";
 		}
-		texto = texto + "\n";
+		textoSimbolos = textoSimbolos + "\n";
 	}
 
 	//Main

@@ -16,6 +16,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.awt.Color;
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
 
 public class SeleccionarArchivo extends JFrame{
@@ -23,16 +27,17 @@ public class SeleccionarArchivo extends JFrame{
 	private static final long serialVersionUID = -1440264901664686208L;
 	private JButton btnSeleccionarArchivo;
 	private JTextArea contenido2;
-	private JButton btnSalir;
+	private JPanel panel2;
 	
 	public SeleccionarArchivo() throws HeadlessException {
 		super("Uso JFileChooser");
-		setPreferredSize(new Dimension(600, 600));
+		getContentPane().setBackground(Color.WHITE);
+		setPreferredSize(new Dimension(900, 900));
 		getContentPane().setSize(new Dimension(300, 400));
 		getContentPane().setLayout(null);
 		
 		btnSeleccionarArchivo = new JButton("Seleccionar archivo ...");
-		btnSeleccionarArchivo.setBounds(32, 16, 267, 45);
+		btnSeleccionarArchivo.setBounds(92, 33, 267, 45);
 		getContentPane().add(btnSeleccionarArchivo);
 		
 		JLabel lbImput = new JLabel("Input");
@@ -59,14 +64,22 @@ public class SeleccionarArchivo extends JFrame{
 		contenido2.setEditable(false);
 		scrollPane_1.setViewportView(contenido2);
 		
-		btnSalir = new JButton("SALIR");
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(457, 44, 89, 23);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(485, 11, 89, 23);
 		getContentPane().add(btnSalir);
+		
+		panel2 = new JPanel();
+		panel2.setBounds(0, 0, 129, 749);
+		panel2.setBackground(new Color(255, 0, 51));
+		getContentPane().add(panel2);
+		getContentPane().setBackground(Color.WHITE);
+		
+		
 		JFileChooser jfcSelectorArchivo = new JFileChooser();
 		//Expresión lambda
 		btnSeleccionarArchivo.addActionListener((ActionEvent e) -> {
@@ -75,7 +88,7 @@ public class SeleccionarArchivo extends JFrame{
 				File archivo = jfcSelectorArchivo.getSelectedFile();
 				JOptionPane.showMessageDialog(this, "Seleccionó " + archivo.getName());
 				SubCadena sc = new SubCadena(archivo);
-				contenido.setText(sc.texto);
+				contenido.setText(sc.textoSimbolos);
 				contenido2.setText(sc.texto2);
 				
 			} else {
