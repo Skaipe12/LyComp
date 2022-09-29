@@ -1,6 +1,6 @@
 
 public class ExpresionesSubCadena {
-	String cadena = "348";
+	String cadena = "3245999999*454";
 	int posicion;
 	char token_Entrada;
 	int[] digitos = new int[]{0,1,2,3,4,5,6,7,8,9};
@@ -16,13 +16,16 @@ public class ExpresionesSubCadena {
 
 	private void numero_Prima() {
 		if(isDigito(token_Entrada) ) {
-			if(token_Entrada!=cadena.charAt(cadena.length()-1)) {
+			if(posicion<cadena.length()) {
 				digito();
 				numero_Prima();
 			} else {
-				//epsilon
+				System.out.println("Es numero");
 			}
-		} 
+		} else {
+			
+			System.out.println("Error: " + (posicion-1));
+		}
 		
 	}
 
@@ -82,7 +85,7 @@ public class ExpresionesSubCadena {
 	public static void main(String[] args) {
 		ExpresionesSubCadena e = new ExpresionesSubCadena();
 		e.principal();
-		System.out.println("Es numero");
+		
 	}
 
 }
