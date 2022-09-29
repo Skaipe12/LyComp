@@ -16,11 +16,13 @@ public class ExpresionesSubCadena {
 
 	private void numero_Prima() {
 		if(isDigito(token_Entrada) ) {
-			digito();
-			numero_Prima();
-		} else {
-			//epsilon
-		}
+			if(token_Entrada!=cadena.charAt(cadena.length()-1)) {
+				digito();
+				numero_Prima();
+			} else {
+				//epsilon
+			}
+		} 
 		
 	}
 
@@ -80,6 +82,7 @@ public class ExpresionesSubCadena {
 	public static void main(String[] args) {
 		ExpresionesSubCadena e = new ExpresionesSubCadena();
 		e.principal();
+		System.out.println("Es numero");
 	}
 
 }
