@@ -32,6 +32,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.border.LineBorder;
 
 public class Main {
@@ -57,8 +58,12 @@ public class Main {
 	private JButton btnGenTablaTokens;
 	private String AuxTxt1;
 	private String AuxTxt2;
+	private String auxTxtExp;
 	private JTable table;
 	private JTable table_1;
+	private JPanel panel_3;
+	private JTable table_2;
+	private JTextArea textExp;
 
 	/**
 	 * Launch the application.
@@ -127,6 +132,7 @@ public class Main {
 				input.setText(sc.textInput);
 				AuxTxt1 = sc.textoSimbolos;
 				AuxTxt2 = sc.texto2;
+				auxTxtExp = sc.expresiones;
 				}
 			}
 		});
@@ -269,6 +275,56 @@ public class Main {
 		btnLimpiar.setFont(new Font("Georgia", Font.BOLD, 11));
 		btnLimpiar.setBounds(46, 267, 128, 33);
 		panel_1.add(btnLimpiar);
+		
+		JPanel panelExpresiones = new JPanel();
+		tabbedPane.addTab("Expresiones", null, panelExpresiones, null);
+		panelExpresiones.setLayout(null);
+		
+		panel_3 = new JPanel();
+		panel_3.setBackground(new Color(204, 0, 51));
+		panel_3.setBounds(514, 0, 215, 535);
+		panelExpresiones.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(10, 28, 462, 95);
+		panelExpresiones.add(scrollPane_3);
+		
+		textExp = new JTextArea();
+		scrollPane_3.setViewportView(textExp);
+		
+		
+		JLabel lblExpresiones = new JLabel("Expresiones encontradas:");
+		lblExpresiones.setBounds(10, 11, 172, 14);
+		panelExpresiones.add(lblExpresiones);
+		
+		JLabel lblValExpresiones = new JLabel("Validaci\u00F3n de Expresiones:");
+		lblValExpresiones.setBounds(10, 177, 157, 14);
+		panelExpresiones.add(lblValExpresiones);
+		
+		JButton btnGenExpresiones = new JButton("Generar Expresiones");
+		btnGenExpresiones.setFont(new Font("Georgia", Font.PLAIN, 13));
+		btnGenExpresiones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textExp.setText(auxTxtExp);
+			}
+		});
+		btnGenExpresiones.setBounds(10, 77, 195, 42);
+		panel_3.add(btnGenExpresiones);
+		
+		
+		table_2 = new JTable();
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Expresi\u00F3n", "Cumple", "Posici\u00F3n", "Posici\u00F3n de Error"},
+			},
+			new String[] {
+				"Expresión", "Cumple", "Posición", "Posición de Error"
+			}
+		));
+		table_2.setBounds(10, 228, 454, 253);
+		panelExpresiones.add(table_2);
+		
 		
 	}
 }

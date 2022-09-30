@@ -18,7 +18,7 @@ public class SubCadena {
 	ArrayList<String> tipo3 = new ArrayList<String>();
 	ArrayList<String> naturales = new ArrayList<String>();
 	ArrayList<Integer> numeros = new ArrayList<Integer>();
-	ArrayList<String> expresiones = new ArrayList<String>();
+	static String expresiones = "";
 	static String textInput="";
 	static String textoSimbolos="";
 	static String texto2="";
@@ -299,6 +299,7 @@ public class SubCadena {
 				subString = strAuxIzq+str.charAt(i)+strAuxDer;
 				i = str.indexOf(str.charAt(i))+strAuxDer.length()+2;
 				System.out.println(subString);
+				expresiones+= subString + "\n";
 			}
 		}
 	}
