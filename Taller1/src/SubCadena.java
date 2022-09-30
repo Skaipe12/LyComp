@@ -17,12 +17,14 @@ public class SubCadena {
 	ArrayList<String> tipo2 = new ArrayList<String>();
 	ArrayList<String> tipo3 = new ArrayList<String>();
 	ArrayList<String> naturales = new ArrayList<String>();
-	 ArrayList<Integer> numeros = new ArrayList<Integer>();
-	 ArrayList<String> expresiones = new ArrayList<String>();
-	static String textInput;
-	static String textoSimbolos;
-	static String texto2;
+	ArrayList<Integer> numeros = new ArrayList<Integer>();
+	ArrayList<String> expresiones = new ArrayList<String>();
+	static String textInput="";
+	static String textoSimbolos="";
+	static String texto2="";
 	static int contTokenIdent = 32;
+	static String aux="";
+	
 	
 	//Constructor en donde se llenan cada una de las listas anteriores con metodos fill para cara tipo.
 	//los metodos fill estan detallados mas abajo.
@@ -61,7 +63,7 @@ public class SubCadena {
 	
 	public ArrayList<String> fillNaturales() {
 		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("0");temp.add("1");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
+		temp.add("0");temp.add("1");temp.add("2");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
 		return temp;
 	}
 	
@@ -127,7 +129,7 @@ public class SubCadena {
 	
 	
 	//Metodo para leer el fichero, recibe un BufferedReader que manda cada linea al m�todo cerebro el cual procesa la cadena.
-	public static void leer(BufferedReader doc) throws IOException {
+	public void leer(BufferedReader doc) throws IOException {
 		String linea;
 		int contador = 0;
 		SubCadena sc = new SubCadena();
@@ -135,17 +137,14 @@ public class SubCadena {
 		while((linea = doc.readLine()) != null) {
 			textInput += linea + "\n";
 			sc.cerebro(linea, contador);
+			clasificarExpresiones(linea,contador);
 			contador++; 
 		}
 		System.out.println("Numeros encontrados: ");
 		for (int i = 0; i < sc.numeros.size(); i++) {
 			System.out.println(sc.numeros.get(i));
 		}
-		System.out.println("Expresiones encontradas: ");
-		for (int i = 0; i < sc.expresiones.size(); i++) {
-			System.out.print(sc.expresiones.get(i));
-		}
-		System.out.println("");
+		
 		System.out.println(textoSimbolos);
 		
 	}
@@ -206,12 +205,8 @@ public class SubCadena {
 			if(separadores.contains(s.charAt(x)+"") || operadores.contains(s.charAt(x) + "")) {
 				//Se identifica si es separador o operador
 				if(separadores.contains(s.charAt(x)+"")) {
-					
 					subString = s.substring(inicio, x);
 					clasificarToken(subString);
-					if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
-						expresiones.add(subString +s.charAt(x)+"("+x+")" );
-					}
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
 					//Se agrega la respectiva ubicaci�n del separador
@@ -241,10 +236,6 @@ public class SubCadena {
 					}else {
 						//Si el operador tiene un solo caracter.
 						subString = s.substring(inicio, x);
-						if(analizarNumero(subString)==true && !(subString.compareTo("")==0)) {
-							expresiones.add(subString+" " +s.charAt(x) +"("+x+")");
-						}
-						
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
 						//Se agrega la respectiva ubicaci�n del operador
@@ -257,6 +248,59 @@ public class SubCadena {
 		//si la linea no termina con ningun separador definido
 		subString = s.substring(inicio, s.length());
 		buscar(subString, inicio, linea);	
+	}
+	
+	
+	public String verificarIzq(String cadenaIzq) {
+		String aux="";
+		for (int i = cadenaIzq.length()-1; i >= 0; i--) {
+			if(analizarNumero(cadenaIzq.charAt(i)+"")==true||cadenaIzq.charAt(i)=='('||operadores.contains(cadenaIzq.charAt(i)+"")) {
+				aux+=cadenaIzq.charAt(i);
+			} else {
+				break;
+			}
+		}
+		StringBuilder stringBuilder = new StringBuilder(aux);
+		String invertida = stringBuilder.reverse().toString();
+		
+		return invertida;
+		
+	}
+	
+	public String verificarDer(String cadenaDer) {
+		String aux="";
+		for (int i = 0; i < cadenaDer.length(); i++) {
+			if(analizarNumero(cadenaDer.charAt(i)+"")==true||cadenaDer.charAt(i)==')'||operadores.contains(cadenaDer.charAt(i)+"")) {
+				if(cadenaDer.charAt(i)+""!=";") {
+				aux+=cadenaDer.charAt(i);
+				}
+			} else {
+				break;
+			}
+		}
+		
+		return aux;
+		
+	}
+	
+	public void clasificarExpresiones(String str, int posicion) {
+		String subString;
+		String strAuxIzq;
+		String strAuxDer;
+		int inicio=0;
+		for (int i = 0; i < str.length(); i++) {
+			if(operadores.contains(str.charAt(i)+"")) {
+				strAuxIzq = verificarIzq(str.substring(0, i));
+				inicio = i+1;
+				strAuxDer = verificarDer(str.substring(inicio,str.length()));
+				if(strAuxIzq.equals("") && strAuxDer.equals("")) {
+					break;
+				}
+				subString = strAuxIzq+str.charAt(i)+strAuxDer;
+				i = str.indexOf(str.charAt(i))+strAuxDer.length()+2;
+				System.out.println(subString);
+			}
+		}
 	}
 	
 	//Switch case para identificar correctamente el token y su id
