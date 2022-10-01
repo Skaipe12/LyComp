@@ -22,7 +22,7 @@ public class SubCadena {
 	static String textInput="";
 	static String textoSimbolos="";
 	static String texto2="";
-	static int contTokenIdent = 32;
+	static int contTokenIdent = 0;
 	static String aux="";
 	
 	
@@ -178,15 +178,14 @@ public class SubCadena {
 		if(s.equals("")) {
 			//Se busca primero si la cadena enviada es una palabra reservada perteneciente a las definidas en la lista.
 		}else if(find.contains(s)) {
-			//texto = texto + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
 			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tPalabra Reservada";
-			//Si el identificador no existe, lo agrega.
 		}else if(!identificadores.contains(s)) {
 			identificadores.add(s);
 			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tidentificador";
-			//Si s� lo tiene, imprime su ubicaci�n-
+			clasificarToken(s);
 		}else if(identificadores.contains(s)) {
 			textoSimbolos = textoSimbolos + s + "\t" + linea + ", " + x + "\tIdentificador";
+			clasificarToken(s);
 		}
 		textoSimbolos = textoSimbolos + "\n";
 	}
@@ -194,9 +193,7 @@ public class SubCadena {
 //Metodo utilizado para procesar la cadena para analizarla y clasificarla. 
 	public void cerebro(String s, int linea) {
 		int cont=0;;
-		//La variable inicio se restaurar� cada vez que se detecte un nuevo s�mbolo a analizar
 		int inicio = 0;
-		//Subcadena que se utilizara para manipular cada s�mbolo encontrado. Se env�a a m�todos externos.
 		String subString;
 		//Este for analiza cada linea del fichero, esta linea llega desde el parametro .
 		for(int x = 0; x < s.length(); x++) {
@@ -206,7 +203,7 @@ public class SubCadena {
 				//Se identifica si es separador o operador
 				if(separadores.contains(s.charAt(x)+"")) {
 					subString = s.substring(inicio, x);
-					clasificarToken(subString);
+					clasificarToken(s.charAt(x) + "");
 					//El simbolo identificado se manda al metodo buscar
 					buscar(subString, inicio, linea);
 					//Se agrega la respectiva ubicaci�n del separador
@@ -238,7 +235,6 @@ public class SubCadena {
 						subString = s.substring(inicio, x);
 						buscar(subString, inicio, linea);
 						inicio = x + 1;
-						//Se agrega la respectiva ubicaci�n del operador
 						textoSimbolos = textoSimbolos + s.charAt(x) + "\t" + linea + ", " + x;
 						definir(s.charAt(x) + "");
 					}
@@ -311,187 +307,219 @@ public class SubCadena {
 		switch (lexema) {
 	case "if": {
 		token = "CondIf";
-		tokenId = 1;
+		tokenId = 101;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "if" + "\n";
+		break;
 	}
 	case "(": {
 		token = "parentIzq";
-		tokenId = 2;
+		tokenId = 201;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "(" + "\n";
+		break;
 	}
 	
 	case "+": {
 		token = "opSuma";
-		tokenId = 3;
-		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ")" + "\n";
+		tokenId = 301;
+		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
+		break;
 	}
 	case "-": {
 		token = "opResta";
-		tokenId = 4;
+		tokenId = 302;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "-" + "\n";
+		break;
 	}
 	
 	case ">=": {
 		token = "mayorIgual";
-		tokenId = 5;
+		tokenId = 401;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ">=" + "\n";
+		break;
 	}
 	
 	case "<=": {
 		token = "menorIgual";
-		tokenId = 6;
+		tokenId = 402;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "<=" + "\n";
+		break;
 	}
 	case ";": {
 		token = "puntoComa";
-		tokenId = 7;
+		tokenId = 210;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ";" + "\n";
+		break;
 	}
 	case "<": {
 		token = "menor";
-		tokenId = 8;
+		tokenId = 403;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "<" + "\n";
+		break;
 	}
 	case ">": {
 		token = "mayor";
-		tokenId = 9;
+		tokenId = 404;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ">" + "\n";
+		break;
 	}
 	case "while": {
 		token = "condWhile";
-		tokenId = 10;
+		tokenId = 102;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "while" + "\n";
+		break;
 	}
 	case "{": {
 		token = "llaveIzq";
-		tokenId = 11;
+		tokenId = 203;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "{" + "\n";
+		break;
 	}
 	case "}": {
 		token = "llaveDer";
-		tokenId = 12;
+		tokenId = 204;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "}" + "\n";
+		break;
 	}
 	case "[": {
 		token = "corcheteIzq";
-		tokenId = 13;
+		tokenId = 205;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "[" + "\n";
+		break;
 	}
 	case "]": {
 		token = "corcheteDer";
-		tokenId = 14;
+		tokenId = 206;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "]" + "\n";
+		break;
 	}
 	case ":": {
 		token = "dosPuntos";
-		tokenId = 15;
+		tokenId = 207;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ":" + "\n";
+		break;
 	}
 	case " ": {
 		token = "espacio";
-		tokenId = 16;
+		tokenId = 208;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + " " + "\n";
+		break;
 	}
 	case "\t": {
 		token = "tabulador";
-		tokenId = 17;
+		tokenId = 209;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "\t" + "\n";
+		break;
 	}
 	
 	case "=": {
 		token = "Operadorigual";
-		tokenId = 18;
+		tokenId = 303;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "=" + "\n";
+		break;
 	}
 	case "==": {
 		token = "OperadorigualIgual";
-		tokenId = 19;
+		tokenId = 405;
 		texto2 = texto2 + token + "\t" + tokenId + "\t\t" +"==" + "\n";
+		break;
 	}
 	case "*": {
 		token = "OperadorMultiplicacion";
-		tokenId = 20;
+		tokenId = 304;
 		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "*" + "\n";
+		break;
 	}
 	case "/": {
 		token = "OperadorDiv";
-		tokenId = 21;
+		tokenId = 305;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "/" + "\n";
+		break;
 	}
 	case "%": {
 		token = "OperadorMod";
-		tokenId = 22;
+		tokenId = 306;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "%" + "\n";
+		break;
 	}
 	case "+=": {
 		token = "opMasIgual";
-		tokenId = 23;
+		tokenId = 307;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+=" + "\n";
+		break;
 	}
 	case "-=": {
 		token = "opMenosIgual";
-		tokenId = 24;
+		tokenId = 308;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "-=" + "\n";
+		break;
 	}
 	case "/=": {
 		token = "opDivisonIgual";
-		tokenId = 25;
+		tokenId = 309;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "/=" + "\n";
+		break;
 	}
 	case "*=": {
 		token = "OperadorMultpIgual";
-		tokenId = 26;
+		tokenId = 310;
 		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "*=" + "\n";
+		break;
 	}
 	case "++": {
 		token = "OperadorDobleMas";
-		tokenId = 27;
+		tokenId = 311;
 		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "++" + "\n";
+		break;
 	}
 	
 	case "--": {
 		token = "OperadorDobleMenos";
-		tokenId = 28;
+		tokenId = 312;
 		texto2 = texto2 + token + "\t" + tokenId + "\t\t" + "--" + "\n";
+		break;
 	}
 	
 	case "&&": {
 		token = "comparador&&";
-		tokenId = 29;
+		tokenId = 406;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" +"&&" + "\n";
+		break;
 	}
 	
 	case "&": {
 		token = "comparador&";
-		tokenId = 29;
+		tokenId = 407;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "&" + "\n";
+		break;
 	}
 	case "||": {
 		token = "comparador||";
-		tokenId = 30;
+		tokenId = 408;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "||" + "\n";
+		break;
 	}
 	case ")": {
 		token = "parentDer";
-		tokenId = 31;
+		tokenId = 202;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
+		break;
 	}
-	//Debido a que hay 31 tokens predefinidos, el resto serian identificadores, por lo que se empiezan a contar desde 31
 	default:
-		if(lexema == "") {
+		if(lexema.equals("")) {
 			
-		} else {
-		if(identificadores.contains(lexema)) {
-			token = "Identificador";
-			tokenId = identificadores.indexOf(lexema)+32;
-		} else {
-			
-			token = "identificador";
-			tokenId += contTokenIdent;
-			contTokenIdent++;
+		}else {
+			if(identificadores.contains(lexema)) {
+				token = "Identificador";
+				tokenId = identificadores.indexOf(lexema)+501;
+				texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
+			} else {
+				token = "identificador";
+				tokenId += contTokenIdent + 500;
+				texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + lexema + "\n";
+				contTokenIdent++;
+			}
 		}
 	}
-		}
 		
 }
 
@@ -504,6 +532,7 @@ public class SubCadena {
 		if(tipo3.contains(s)) {
 			textoSimbolos = textoSimbolos + "\tSeparador";
 		}
+		clasificarToken(s);
 		textoSimbolos = textoSimbolos + "\n";
 	}
 
