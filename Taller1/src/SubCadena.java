@@ -471,8 +471,8 @@ public class SubCadena {
 		tokenId = 30;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "||" + "\n";
 	}
-	case "+": {
-		token = "opSuma";
+	case ")": {
+		token = "parentDer";
 		tokenId = 31;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "+" + "\n";
 	}
