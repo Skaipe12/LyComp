@@ -62,8 +62,8 @@ public class Main {
 	private JTable table;
 	private JTable table_1;
 	private JPanel panel_3;
-	private JTable table_2;
 	private JTextArea textExp;
+	private String auxExp;
 
 	/**
 	 * Launch the application.
@@ -156,6 +156,7 @@ public class Main {
 		panelMain.add(scrollPane);
 		
 		input = new JTextArea();
+		input.setEditable(false);
 		input.setBackground(SystemColor.controlHighlight);
 		scrollPane.setViewportView(input);
 		
@@ -191,6 +192,7 @@ public class Main {
 		panelSimbolos.add(scrollPane_1);
 		
 		textSimbolos = new JTextArea();
+		textSimbolos.setEditable(false);
 		textSimbolos.setBackground(SystemColor.controlHighlight);
 		scrollPane_1.setViewportView(textSimbolos);
 		
@@ -231,6 +233,7 @@ public class Main {
 		panelTokens.add(scrollPane_2);
 		
 		textTokens = new JTextArea();
+		textTokens.setEditable(false);
 		textTokens.setBackground(SystemColor.controlHighlight);
 		scrollPane_2.setViewportView(textTokens);
 		
@@ -291,6 +294,7 @@ public class Main {
 		panelExpresiones.add(scrollPane_3);
 		
 		textExp = new JTextArea();
+		textExp.setEditable(false);
 		scrollPane_3.setViewportView(textExp);
 		
 		
@@ -312,18 +316,40 @@ public class Main {
 		btnGenExpresiones.setBounds(10, 77, 195, 42);
 		panel_3.add(btnGenExpresiones);
 		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(10, 202, 462, 116);
+		panelExpresiones.add(scrollPane_4);
 		
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Expresi\u00F3n", "Cumple", "Posici\u00F3n", "Posici\u00F3n de Error"},
-			},
-			new String[] {
-				"Expresión", "Cumple", "Posición", "Posición de Error"
+		JTextArea textArea = new JTextArea();
+		scrollPane_4.setViewportView(textArea);
+		
+		
+		JButton btnEvaluarExp = new JButton("Evaluar Expresiones");
+		btnEvaluarExp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				auxExp = textArea.getText();
+				ExpresionesSubCadena exp = new ExpresionesSubCadena(auxExp);
+				if(exp.arrayErrores.size()>0) {
+				for (int i = 0; i < exp.arrayErrores.size(); i++) {
+					auxExp += "\n" + exp.arrayErrores.get(i) ;
+				}
+				textArea.setText(auxExp);
+				} else {
+					if(exp.posicion<exp.cadena.length()) {
+						auxExp += "\n" + "undefined " + (exp.posicion-1);
+						textArea.setText(auxExp);
+					}else {
+					auxExp += "\n"+ "Aceptado";
+					textArea.setText(auxExp);
+					}
+				}
+				
 			}
-		));
-		table_2.setBounds(10, 228, 454, 253);
-		panelExpresiones.add(table_2);
+		});
+		btnEvaluarExp.setFont(new Font("Georgia", Font.PLAIN, 13));
+		btnEvaluarExp.setBounds(10, 223, 195, 42);
+		panel_3.add(btnEvaluarExp);
+		
 		
 		
 	}
