@@ -320,7 +320,7 @@ public class SubCadena {
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + "(" + "\n";
 	}
 	
-	case ")": {
+	case "+": {
 		token = "opSuma";
 		tokenId = 3;
 		texto2 = texto2 + token + "\t\t" + tokenId + "\t\t" + ")" + "\n";
