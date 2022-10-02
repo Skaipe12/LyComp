@@ -5,7 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/*class: Subcadena
+ * Clase donde se guardan todos los opreadores, separadores y palabras reservadas previamente definidas.
+ * Tambien guarda los identificadores y numeros que se encuentren.
+ * Encargada de guardar las strings donde se van a guardar las tablas de simbolos y de tokens y el contador de identificadores.
+ */
 public class SubCadena {
 	
 	ArrayList<String> separadores = new ArrayList<String>();
@@ -23,6 +27,14 @@ public class SubCadena {
 	static int contTokenIdent = 0;
 	static String aux="";
 	
+	/*Constructor: SubCadena
+	 * Inicializa la clase y llama a los metodos que van a llenar las listas.
+	 * Encargada de crear el bufferedReader que contiene el txt que se desea analizar y de cerrarlo cuando se termine el analisis.
+	 * Parameters:
+	 * 	doc - File que tiene el txt a analizar
+	 * See also:
+	 * 	<leer>
+	 */
 	public SubCadena(File doc) {
 		super();
 		this.separadores = fillSeparadores();
@@ -42,6 +54,9 @@ public class SubCadena {
 		}
 	}
 	
+	/*Constructor: SubCadena
+	 * Inicializa la clase y llama a los metodos que van a llenar las listas.
+	 */
 	public SubCadena() {
 		super();
 		this.separadores = fillSeparadores();
@@ -53,12 +68,18 @@ public class SubCadena {
 		
 	}
 	
+	/*Function: fillNaturales
+	 * Llena la lista de los numeros naturales y el 0
+	 */
 	public ArrayList<String> fillNaturales() {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("0");temp.add("1");temp.add("2");temp.add("3");temp.add("4"); temp.add("5");temp.add("6");temp.add("7");temp.add("8");temp.add("9");
 		return temp;
 	}
 	
+	/*Function: fillSeparadores
+	 * Llena la lista de los separadores predefinidos
+	 */
 	public ArrayList<String> fillSeparadores() {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
@@ -67,11 +88,9 @@ public class SubCadena {
 		return temp;
 	}
 	
-	//Para la identificaci�n de los tipos, que en nuestro caso sigue la la jerarquia: 
-//	tipo 1: identificadores
-//	tipo 2: comparadores
-//	tipo 3: separadores
-	
+	/*Function: fillTipo2
+	 * Llena la lista de operadores.
+	 */
 	public ArrayList<String> fillTipo2(){
 		ArrayList<String> tipo2 = new ArrayList<String>();
 		tipo2.add("=="); tipo2.add(">=");tipo2.add("<="); tipo2.add(">"); tipo2.add("<"); tipo2.add("=");
@@ -79,7 +98,9 @@ public class SubCadena {
 		return tipo2;
 	}
 	
-	
+	/*Function: fillTipo3
+	 * Llena la lista de separadores y operadores que funcionan como estos.
+	 */
 	public ArrayList<String> fillTipo3(){
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%");
@@ -87,11 +108,14 @@ public class SubCadena {
 		temp.add("/="); temp.add("*="); temp.add("%="); temp.add(">"); temp.add("<");
 		temp.add("&&"); temp.add("||"); temp.add("&"); temp.add("|"); temp.add("++");
 		temp.add("--");temp.add(" "); temp.add("{"); temp.add("}"); temp.add("["); temp.add("]");
-		temp.add(","); temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); temp.add("	"); temp.add("=="); temp.add(";");
+		temp.add(","); temp.add(";"); temp.add("."); temp.add("("); temp.add(")"); temp.add("\t"); temp.add("=="); temp.add(";");
 
 		return temp;
 	}
 		
+	/*Function: fillOperadores
+	 * Llena la lista de operadores.
+	 */
 	public ArrayList<String> fillOperadores(){
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("+"); temp.add("-"); temp.add("*"); temp.add("/"); temp.add("%");
@@ -102,6 +126,9 @@ public class SubCadena {
 		return temp;
 	}
 	
+	/*Function: fillFind
+	 * Llena la lista de las palabras reservadas
+	 */
 	public ArrayList<String> fillFind(){
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("while");
@@ -110,7 +137,17 @@ public class SubCadena {
 		return temp;
 	}
 	
-	
+	/*Function: leer
+	 * Funcion que resive un BufferedReader que divide el txt linea por linea, para ir analizandolas una por una,
+	 * se crea el objeto subcadena, y desde aqui se llama el metodo cerebro del objeto subcadena.
+	 * Tambien se llama al metodo clasificarExpresion.
+	 * Parameters:
+	 * 	doc - BufferedReader que contiene el txt.
+	 * Returns:
+	 * 	Void
+	 * See also:
+	 * 	<cerebro> <clasificarExpresiones>
+	 */
 	public void leer(BufferedReader doc) throws IOException {
 		String linea;
 		int contador = 0;
@@ -145,7 +182,19 @@ public class SubCadena {
 		return false;
 	}
 
-	
+	/*Function: buscar
+	 * Clasifica una string entre palabara reservada y identificador, agregando el ultimo a una lista de identificadores si no se encuntra en esta.
+	 * Va agregando informacion a la string que mostrara la informacion de la tabla de simbolos.
+	 * Llama al metodo clasificarToken
+	 * Parameters: 
+	 * 	s - String que se clasifica.
+	 * 	x - Posicion de la string.
+	 * 	linea - Linea donde esta la string que se analiza.
+	 * Returns:
+	 * 	Void
+	 * See also:
+	 * 	<clasificarToken>
+	 */
 	public void buscar(String s, int x, int linea) {
 		if(s.equals("")) {
 		}else if(find.contains(s)) {
@@ -162,7 +211,18 @@ public class SubCadena {
 		textoSimbolos = textoSimbolos + "\n";
 	}
 	
-	
+	/*Function: cerebro
+	 * Metodo principal que divide la string resivida palabra por palabra, y separador por separador, para despues llamar a los metodos
+	 * que clasifican la string.
+	 * Tambien es el metodo encargado de agregar los separadores al texto que mostrara la tabla de simbolos. 
+	 * Parameters:
+	 * 	s - String que contiene el texto de una sola linea del txt que se analiza.
+	 * 	linea - La linea que se esta analizando.
+	 * Returns:
+	 * 	Void
+	 * See also:
+	 * 	<buscar> <clasificarToken> <definir>
+	 */
 	public void cerebro(String s, int linea) {
 		int inicio = 0;
 		String subString;
@@ -260,8 +320,13 @@ public class SubCadena {
 	}
 	
 	/*
-	 * Metodo: clasificar token
-	 * 
+	 * Function: clasificarToken
+	 * Clasifica una string en los token predefinidos y leas asigna su respectivo tokenId.
+	 * Va agregando informacion a la string que mostrara la informacion de la tabla de tokens.
+	 * Parameters:
+	 * 	lexema - String que contiene el token a clasificar
+	 * returns:
+	 * 	void
 	 */
 	private void clasificarToken(String lexema) {
 	int tokenId=0;
@@ -485,6 +550,15 @@ public class SubCadena {
 		
 }
 
+	/*Function: definir
+	 * Clasifica en la tabla de simbolos si la string es un comparador o separador.
+	 * Parameters:
+	 * 	s - String que se va a clasificar
+	 * returns:
+	 * 	void
+	 * See also:
+	 * 	<clasificarToken>
+	 */
 	public void definir(String s) {
 		if(tipo2.contains(s)) {
 			textoSimbolos = textoSimbolos + "\tComparador";
