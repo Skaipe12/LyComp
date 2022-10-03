@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("cla",["Function"],[["clasificarExpresiones",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.clasificarExpresiones","JavaClass:Subcadena:clasificarExpresiones"]]],["clasificarToken",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.clasificarToken","JavaClass:Subcadena:clasificarToken"]]]]);

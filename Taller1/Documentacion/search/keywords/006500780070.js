@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("exp",["Function","Class"],[["Expresion_Prima",,[["ExpresionesSubCadena:",,,,0,"File:ExpresionesSubCadena.java:ExpresionesSubCadena_.Expresion_Prima","JavaClass:ExpresionesSubCadena_:Expresion_Prima"]]],["ExpresionesSubCadena:",,[[,,,,1,"File:ExpresionesSubCadena.java:ExpresionesSubCadena_","JavaClass:ExpresionesSubCadena_"]]]]);

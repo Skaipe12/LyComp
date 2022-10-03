@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 //para manejadorde errores seguir la cadena en termino, no en expresión.
 
-/*Clase ExpresionesSubCadena:
+/*Class: ExpresionesSubCadena:
 *Clase encargada de aplicar la gramática de expresiones a las mismas encontradas en la clase 
 *SubCadena.
 *
@@ -15,7 +15,8 @@ public class ExpresionesSubCadena {
 	ArrayList<String> arrayErrores = new ArrayList<String>();
 
 	/*Constructor:
-	Parámetros: String str -> Cadena que recibe para analizar su gramática.
+	*Parameters: 
+	* str - String que recibe para analizar su gramática.
 	*/
 	
 	public ExpresionesSubCadena(String str) {
@@ -25,11 +26,9 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion Expresion:
-	 * Parametros: N/A
-	 * Descripción: Funcion que empieza la gramatica de expresion. Llama a la función termino y elimina
-	 * la recursividad por la izquierda con expresión prima.
-	 *
+	 *Function: Expresion.
+	 *Funcion que empieza la gramatica de expresion. Llama a la función termino y elimina
+	 *la recursividad por la izquierda con expresión prima.
 	 */
 	public void expresion() {
 		termino();
@@ -37,11 +36,9 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion Termino:
-	 * Parametros: N/A
-	 * Descripción: Funcion encargada de seguir la gramática, derivando a factor y termino prima.
+	 * Function: Termino.
+	 * Funcion encargada de seguir la gramática, derivando a factor y termino prima.
 	 * Como se logra observar, la recursividad a la izquierda también es eliminada.
-	 *
 	 */
 	private void termino() {
 		factor();
@@ -49,9 +46,8 @@ public class ExpresionesSubCadena {
 		
 	}
 	/*
-	 * Funcion termino_Prima:
-	 * Parametros: N/A
-	 * Descripción: Función que verifica siempre si el token de entrada es un simbolo terminal
+	 * Function: termino_Prima.
+	 * Función que verifica siempre si el token de entrada es un simbolo terminal
 	 * para hacer match con este y luego deriva las correspondientes funciones que van acorde a la 
 	 * gramática.
 	 *
@@ -72,9 +68,8 @@ public class ExpresionesSubCadena {
 	}
 
 	/*
-	 * Funcion Factir:
-	 * Parametros: N/A
-	 * Descripción: Funcion similar a termino prima en donde se evaluan los factores, que empiezan
+	 * Function: Factor
+	 * Funcion similar a termino prima en donde se evaluan los factores, que empiezan
 	 * con un paréntesis y luego derivan la gramática correspondiente (expresión).
 	 * Al finalizar, vuelve a llamar la función hacer Match para verificar si termina con un parentesis.
 	 * En caso de no empezar con paréntesis, se deriva a número.
@@ -91,9 +86,8 @@ public class ExpresionesSubCadena {
 	}
 
 	/*
-	 * Funcion Expresion_Prima:
-	 * Parametros: N/A
-	 * Descripción: funcion que verifica que el simbolo de entrada presente cuando sea llamada sea 
+	 * Function: Expresion_Prima
+	 * funcion que verifica que el simbolo de entrada presente cuando sea llamada sea 
 	 * terminal, para inmediatamente hacer match y continuar con la derivación de la gramática.
 	 *
 	 */
@@ -113,9 +107,8 @@ public class ExpresionesSubCadena {
 	
 	
 	/*
-	 * Funcion Numero:
-	 * Parametros: N/A
-	 * Descripción: Función encargada de verificar los numeros encontrados en la cadena principal
+	 * Function: numero.
+	 * Función encargada de verificar los numeros encontrados en la cadena principal
 	 * para verificar su derivación.
 	 */
 	public void numero() {
@@ -124,9 +117,8 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion numero_Prima:
-	 * Parametros: N/A
-	 * Descripción: Función utilizada para eliminar la recursividad por la izquierda de la función 
+	 * Function: numero_Prima.
+	 * Función utilizada para eliminar la recursividad por la izquierda de la función 
 	 * número. Verifica si el actual token de entrada es un digito para seguir con la derivación
 	 * acorde a número.
 	 */
@@ -141,9 +133,8 @@ public class ExpresionesSubCadena {
 	}
 
 	/*
-	 * Funcion digito:
-	 * Parametros: N/A
-	 * Descripción: Función encargada de verificar la derivación de digito. Cuando no es dígito, marca
+	 * Function: digito.
+	 * Función encargada de verificar la derivación de digito. Cuando no es dígito, marca
 	 * error en la posición actual del token de entrada.
 	 *
 	 */
@@ -158,12 +149,14 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion isDigito:
-	 * Parametros: char token_Entrada
-	 * Descripción: Método encargado de verificar que los token de entrada sean dígitos. Recibe el token
+	 * Function: isDigito.
+	 * Método encargado de verificar que los token de entrada sean dígitos. Recibe el token
 	 * que se quiere analizar y lo convierte a un entero para así buscar su equivalente valor en un array de 
 	 * digitos. Se tiene una bandera que cambia su estado a True al encontrar el digito en el array.
-	 * Output: True-False. 
+	 * Parameters: 
+	 *  token_Entrada - Character analisado
+	 * Returns:
+	 *  boolean 
 	 *
 	 */
 	private boolean isDigito(char token_Entrada2) {
@@ -181,10 +174,11 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion hacerMatch:
-	 * Parametros: char t
-	 * Descripción: Función encargada de dar paso al siguiente token si las reglas de derivación
+	 * Function: hacerMatch
+	 * Función encargada de dar paso al siguiente token si las reglas de derivación
 	 * van acorde a lo que se tiene planteado en la gramática. No retorna ningún valor.
+	 * Parameters:
+	 *  t - Character
 	 *
 	 */
 	public void hacerMatch(char t) {
@@ -196,14 +190,10 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion siguienteToken:
-	 * Parametros: N/A
-	 * Descripción: Función encargada de mover el puntero en las posiciones de la cadena.
-	 * Output: 
-	 * Retorna la posición deseada si no ha llegado al final de la cadena.
-	 * Retorna un caracter vacío si se llegó al final de la cadena. (Esto sirve de modo de verificación
-	 * cuando se quiera para de analizar).
-	 * 
+	 * Function: siguienteToken.
+	 * Función encargada de mover el puntero en las posiciones de la cadena.
+	 * Returns:
+	 *  Character
 	 */
 	public char siguienteToken() {
 		char aux = '\0';
@@ -216,11 +206,11 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion primerToken:
-	 * Parametros: N/A
-	 * Descripción: Método encargado de dar inicio al analizador entregando el primer token de la cadena
+	 * Function: primerToken.
+	 * Método encargado de dar inicio al analizador entregando el primer token de la cadena
 	 * a analizar y sumando por primera vez la posición del puntero.
-	 * Output: Primera posición de la cadena.
+	 * Returns: 
+	 *  Character
 	 */
 	public char primerToken() {
 		posicion+=1;
@@ -228,9 +218,8 @@ public class ExpresionesSubCadena {
 	}
 	
 	/*
-	 * Funcion principal:
-	 * Parametros: N/A
-	 * Descripción: Método encargado de poner en funcionamiento al analizador.
+	 * Function: principal.
+	 * Método encargado de poner en funcionamiento al analizador.
 	 * Deja en orden todo lo necesario para empezar el análisis con el método expresión.
 	 */
 	public void principal() {
