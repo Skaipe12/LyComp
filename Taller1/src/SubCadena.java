@@ -266,6 +266,15 @@ public class SubCadena {
 	}
 	
 	
+	/*
+	 * Function: VerificarIzq
+	 * Se encarga de verificar una cadena a la izquierda de cada expresión encontrada, esta se define
+	 * cada vez que encuentre un operador.
+	 * Parameters:
+	 * 	cadenaIzq - String que contiene la cadena a la izquierda del operador.
+	 * returns:
+	 * 	Retorna la cadena analizada analizada invertida, pues el análisis se da de derecha a izquierda.
+	 */
 	public String verificarIzq(String cadenaIzq) {
 		String aux="";
 		for (int i = cadenaIzq.length()-1; i >= 0; i--) {
@@ -282,6 +291,15 @@ public class SubCadena {
 		
 	}
 	
+	/*
+	 * Function: VerificarDer
+	 * Se encarga de verificar una cadena a la derecha de cada expresión encontrada, esta se define
+	 * cada vez que encuentre un operador.
+	 * Parameters:
+	 * 	cadenaDer - String que contiene la cadena a la derecha del operador.
+	 * returns:
+	 * 	Retorna la cadena analizada analizada.
+	 */
 	public String verificarDer(String cadenaDer) {
 		String aux="";
 		for (int i = 0; i < cadenaDer.length(); i++) {
@@ -298,6 +316,17 @@ public class SubCadena {
 		
 	}
 	
+	/*
+	 * Function: clasificarExpresiones
+	 * Se encarga de clasificar las expresiones encontradas. Lo que hace es partir una expresion aritmética
+	 * en dos cadenas y un símbolo. Las cadenas son las que están a la derecha e izquierda del simbolo.
+	 * El símbolo corresponde al operador que separa la expresión.
+	 * Parameters:
+	 * 	str - String que contiene la cadena a analizar
+	 *  posición - int que nos dice la posición donde encuentra la expresión aritmetica.
+	 * returns:
+	 * 	void.
+	 */
 	public void clasificarExpresiones(String str, int posicion) {
 		String subString;
 		String strAuxIzq;
