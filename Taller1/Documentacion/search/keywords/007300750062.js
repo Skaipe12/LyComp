@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("sub",["Class","Function"],[["SubCadena",,[[,"Subcadena",,,0,"File:SubCadena.java:Subcadena","JavaClass:Subcadena"],["Subcadena",,,,1,"File:SubCadena.java:Subcadena.SubCadena","JavaClass:Subcadena:SubCadena"]]]]);

@@ -1,0 +1,1 @@
+﻿NDMenu.OnSectionLoaded("classes.js",[[1,"ExpresionesSubCadena:","ExpresionesSubCadena_"],[1,"Subcadena"]]);

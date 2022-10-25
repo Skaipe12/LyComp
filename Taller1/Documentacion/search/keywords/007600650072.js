@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("ver",["Function"],[["VerificarDer",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.VerificarDer","JavaClass:Subcadena:VerificarDer"]]],["VerificarIzq",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.VerificarIzq","JavaClass:Subcadena:VerificarIzq"]]]]);

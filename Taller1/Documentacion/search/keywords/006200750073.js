@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("bus",["Function"],[["buscar",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.buscar","JavaClass:Subcadena:buscar"]]]]);

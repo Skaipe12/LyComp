@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("fac",["Function"],[["Factor",,[["ExpresionesSubCadena:",,,,0,"File:ExpresionesSubCadena.java:ExpresionesSubCadena_.Factor","JavaClass:ExpresionesSubCadena_:Factor"]]]]);

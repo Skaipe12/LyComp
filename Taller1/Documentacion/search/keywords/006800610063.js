@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("hac",["Function"],[["hacerMatch",,[["ExpresionesSubCadena:",,,,0,"File:ExpresionesSubCadena.java:ExpresionesSubCadena_.hacerMatch","JavaClass:ExpresionesSubCadena_:hacerMatch"]]]]);

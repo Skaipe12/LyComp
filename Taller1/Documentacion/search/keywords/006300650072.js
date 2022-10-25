@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("cer",["Function"],[["cerebro",,[["Subcadena",,,,0,"File:SubCadena.java:Subcadena.cerebro","JavaClass:Subcadena:cerebro"]]]]);
