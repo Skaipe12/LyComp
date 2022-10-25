@@ -1,10 +1,11 @@
-a+b
+7*8;
 pépe
+brayanb33
 brayanb
-brayanb
-huevos 23
-	public void buscar(String s, int x, int linea) {
-		if(s.equals("")) {
+i++;
+556*3689+0; 5(4-12);
+	public void buscar(String s, int x) {
+		if(4>7*3) {
 		}else if(find.contain(s)) {
 			System.out.println(s + " posicion: " + linea + ", " + x);
 		}else if(!identificadores.contains(s)) {
@@ -13,7 +14,8 @@ huevos 23
 
 		}else if(identificadores.contains(s)) {
 			System.out.println("Identificador: " + s + " Posicion:" + linea + ", " + x + " Tipo 1");
->
-=
+a32=17
+
+77*(84-10);
 
 		}

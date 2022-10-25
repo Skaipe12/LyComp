@@ -165,6 +165,17 @@ public class SubCadena {
 		System.out.println(textoSimbolos);
 	}
 	
+	/*Function: AnalizarNumero
+	 * Verifica si el token recibido es un número.
+	 * Parameters: 
+	 * 	s - String que se clasifica.
+	 * 	x - Posicion de la string.
+	 * 	linea - Linea donde esta la string que se analiza.
+	 * Returns:
+	 * 	Void
+	 * See also:
+	 * 	<clasificarToken>
+	 */
 	public boolean analizarNumero(String token) {
 		int cont=0;
 		for (int i = 0; i < token.length(); i++) {

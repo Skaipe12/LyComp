@@ -13,6 +13,8 @@ public class ExpresionesSubCadena {
 	char token_Entrada;
 	int[] digitos = new int[]{0,1,2,3,4,5,6,7,8,9};
 	ArrayList<String> arrayErrores = new ArrayList<String>();
+	ArrayList<String> notacionPrefija = new ArrayList<String>();
+	ArrayList<String> notacionPosfija = new ArrayList<String>();
 
 	/*Constructor:
 	Parámetros: String str -> Cadena que recibe para analizar su gramática.
@@ -21,7 +23,15 @@ public class ExpresionesSubCadena {
 	public ExpresionesSubCadena(String str) {
 		this.cadena = str;
 		principal();
+		System.out.println("Notación Prefija: ");
+		for (int i = 0; i < notacionPrefija.size(); i++) {
+			System.out.println(notacionPrefija.get(i));
+		}
 		
+		System.out.println("Notación PosFija: ");
+		for (int i = 0; i < notacionPosfija.size(); i++) {
+			System.out.println(notacionPosfija.get(i));
+		}
 	}
 	
 	/*
@@ -59,12 +69,16 @@ public class ExpresionesSubCadena {
 	private void termino_Prima() {
 		if(token_Entrada=='*') {
 			hacerMatch(token_Entrada);
+			notacionPrefija.add("*");
 			factor();
 			termino_Prima();
+			notacionPosfija.add("*");
 		} else if(token_Entrada=='/') {
 			hacerMatch(token_Entrada);
+			notacionPrefija.add("/");
 			factor();
 			termino_Prima();
+			notacionPosfija.add("/");
 		} else {
 			//epsilon
 		}
@@ -85,6 +99,8 @@ public class ExpresionesSubCadena {
 			expresion();
 			hacerMatch(token_Entrada);
 		} else {
+			//Nuevo
+			
 			numero();
 			}
 		
@@ -100,12 +116,18 @@ public class ExpresionesSubCadena {
 	private void expresion_Prima() {
 		if(token_Entrada=='+') {
 			hacerMatch(token_Entrada);
+			//nuevo
+			//System.out.println("+");
+			notacionPrefija.add("+");
 			termino();
 			expresion_Prima();
+			notacionPosfija.add("+");
 		} else if(token_Entrada=='-') {
 				hacerMatch(token_Entrada);
+				notacionPrefija.add("-");
 				termino();
 				expresion_Prima();
+				notacionPosfija.add("-");
 			}else {
 				//Epsilon
 		}
@@ -132,6 +154,7 @@ public class ExpresionesSubCadena {
 	 */
 	private void numero_Prima() {
 		if(isDigito(token_Entrada) ) {
+				
 				digito();
 				numero_Prima();
 		} else {
@@ -149,6 +172,8 @@ public class ExpresionesSubCadena {
 	 */
 	private void digito() {
 		if(isDigito(token_Entrada)) {
+			notacionPrefija.add(token_Entrada+"");
+			notacionPosfija.add(token_Entrada+"");
 			hacerMatch(token_Entrada);
 		} else {
 			System.out.println("error en posición " + posicion);

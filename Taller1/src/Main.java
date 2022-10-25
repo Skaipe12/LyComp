@@ -64,6 +64,9 @@ public class Main {
 	private JPanel panel_3;
 	private JTextArea textExp;
 	private String auxExp;
+	private String auxPrefija ="";
+	private String auxPosfija= "";
+	private JScrollPane scrollPane_6;
 
 	/**
 	 * Launch the application.
@@ -324,10 +327,57 @@ public class Main {
 		scrollPane_4.setViewportView(textArea);
 		
 		
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(10, 411, 235, 34);
+		panelExpresiones.add(scrollPane_5);
+		
+		JTextArea txtPrefija = new JTextArea();
+		txtPrefija.setEditable(false);
+		txtPrefija.setBounds(10, 411, 235, 34);
+		scrollPane_5.setViewportView(txtPrefija);
+		
+
+		scrollPane_6 = new JScrollPane();
+		scrollPane_6.setBounds(255, 411, 235, 34);
+		panelExpresiones.add(scrollPane_6);
+		
+		JTextArea txtPosfija = new JTextArea();
+		txtPosfija.setEditable(false);
+		txtPosfija.setBounds(255, 411, 235, 34);
+		scrollPane_6.setViewportView(txtPosfija);
+		
+		JButton btnNotacionPrefija = new JButton("Notaci\u00F3n Prefija");
+		btnNotacionPrefija.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtPrefija.setText(auxPrefija);
+				auxPrefija ="";
+			}
+		});
+		btnNotacionPrefija.setFont(new Font("Georgia", Font.PLAIN, 13));
+		btnNotacionPrefija.setBounds(46, 365, 157, 34);
+		panelExpresiones.add(btnNotacionPrefija);
+		
+		JButton btnNotacionPosfija = new JButton("Notaci\u00F3n Posfija");
+		btnNotacionPosfija.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtPosfija.setText(auxPosfija);
+				auxPosfija = "";
+			}
+		});
+		btnNotacionPosfija.setFont(new Font("Georgia", Font.PLAIN, 13));
+		btnNotacionPosfija.setBounds(298, 365, 157, 34);
+		panelExpresiones.add(btnNotacionPosfija);
+		
+		
+		
+		
+		
 		JButton btnEvaluarExp = new JButton("Evaluar Expresiones");
 		btnEvaluarExp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				auxExp = textArea.getText();
+				txtPrefija.setText("");
+				txtPosfija.setText("");
 				ExpresionesSubCadena exp = new ExpresionesSubCadena(auxExp);
 				if(exp.arrayErrores.size()>0) {
 				for (int i = 0; i < exp.arrayErrores.size(); i++) {
@@ -343,12 +393,22 @@ public class Main {
 					textArea.setText(auxExp);
 					}
 				}
+				//Infija y posFija
+				for (int i = 0; i < exp.notacionPrefija.size(); i++) {
+					auxPrefija += " " + exp.notacionPrefija.get(i);
+				}
+				
+				for (int i = 0; i < exp.notacionPosfija.size(); i++) {
+					auxPosfija += " " + exp.notacionPosfija.get(i);
+				}
 				
 			}
 		});
 		btnEvaluarExp.setFont(new Font("Georgia", Font.PLAIN, 13));
 		btnEvaluarExp.setBounds(10, 223, 195, 42);
 		panel_3.add(btnEvaluarExp);
+		
+		
 		
 		
 		
