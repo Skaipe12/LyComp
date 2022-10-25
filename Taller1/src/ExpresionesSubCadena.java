@@ -257,6 +257,14 @@ public class ExpresionesSubCadena {
 		expresion();
 	}
 	
+	/*
+	 * Function: precedence.
+	 * Método que se utiliza para saber si es un operador o un operando.
+	 * Returns:
+	 * Integer
+	 * 
+	 * 
+	 */
 	static int precedence(char c){
         switch (c){
             case '+':
@@ -270,6 +278,16 @@ public class ExpresionesSubCadena {
         }
         return -1;
     }
+	
+	/*
+	 * Function: precedence.
+	 * Método que se utiliza para convertir la expresión entregada en notación infija y mediante el uso de pilas convertir la expresión a notación prefija.
+	 * Returns: 
+	 * 
+	 * String
+	 * 
+	 * 
+	 */
 
     static String infixToPreFix(String expression){
 
