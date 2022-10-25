@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-
 //para manejadorde errores seguir la cadena en termino, no en expresión.
+import java.util.Stack;
 
 /*Class: ExpresionesSubCadena:
 *Clase encargada de aplicar la gramática de expresiones a las mismas encontradas en la clase 
@@ -15,7 +15,7 @@ public class ExpresionesSubCadena {
 	ArrayList<String> arrayErrores = new ArrayList<String>();
 	ArrayList<String> notacionPrefija = new ArrayList<String>();
 	ArrayList<String> notacionPosfija = new ArrayList<String>();
-
+	String strInfix = "";
 	/*Constructor:
 	*Parameters: 
 	* str - String que recibe para analizar su gramática.
@@ -26,6 +26,7 @@ public class ExpresionesSubCadena {
 		principal();
 		System.out.println("Notación Prefija: ");
 		for (int i = 0; i < notacionPrefija.size(); i++) {
+			strInfix += notacionPrefija.get(i);
 			System.out.println(notacionPrefija.get(i));
 		}
 		
@@ -33,6 +34,7 @@ public class ExpresionesSubCadena {
 		for (int i = 0; i < notacionPosfija.size(); i++) {
 			System.out.println(notacionPosfija.get(i));
 		}
+
 	}
 	
 	/*
@@ -128,6 +130,8 @@ public class ExpresionesSubCadena {
 	}
 	
 	
+	
+
 	/*
 	 * Function: numero.
 	 * Función encargada de verificar los numeros encontrados en la cadena principal
@@ -252,6 +256,72 @@ public class ExpresionesSubCadena {
 		token_Entrada = primerToken();
 		expresion();
 	}
+	
+	static int precedence(char c){
+        switch (c){
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+
+    static String infixToPreFix(String expression){
+
+        StringBuilder result = new StringBuilder();
+        StringBuilder input = new StringBuilder(expression);
+        input.reverse();
+        Stack<Character> stack = new Stack<Character>();
+
+        char [] charsExp = new String(input).toCharArray();
+        for (int i = 0; i < charsExp.length; i++) {
+
+            if (charsExp[i] == '(') {
+                charsExp[i] = ')';
+                i++;
+            }
+            else if (charsExp[i] == ')') {
+                charsExp[i] = '(';
+                i++;
+            }
+        }
+        for (int i = 0; i <charsExp.length ; i++) {
+            char c = charsExp[i];
+
+            //check if char is operator or operand
+            if(precedence(c)>0){
+                while(stack.isEmpty()==false && precedence(stack.peek())>=precedence(c)){
+                    result.append(stack.pop());
+                }
+                stack.push(c);
+            }else if(c==')'){
+                char x = stack.pop();
+                while(x!='('){
+                    result.append(x);
+                    x = stack.pop();
+                }
+            }else if(c=='('){
+                stack.push(c);
+            }else{
+                //character is neither operator nor "("
+                result.append(c);
+            }
+        }
+
+        for (int i = 0; i <=stack.size() ; i++) {
+            result.append(stack.pop());
+        }
+        
+        result.reverse();
+        String aux = result.toString();
+        
+        return aux;
+    }
 	
 
 

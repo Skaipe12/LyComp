@@ -68,6 +68,9 @@ public class Main {
 	private String auxPrefija ="";
 	private String auxPosfija= "";
 	private JScrollPane scrollPane_6;
+	private JTextArea textArea;
+	private JTextArea txtPrefija;
+	private JTextArea txtPosfija;
 
 	/**
 	 * Launch the application.
@@ -134,9 +137,13 @@ public class Main {
 				SubCadena sc = new SubCadena(archivo);
 				input.setText("");
 				input.setText(sc.textInput);
+				sc.textInput = "";
 				AuxTxt1 = sc.textoSimbolos;
+				sc.textoSimbolos = "";
 				AuxTxt2 = sc.texto2;
+				sc.texto2 = "";
 				auxTxtExp = sc.expresiones;
+				sc.expresiones = "";
 				}
 			}
 		});
@@ -277,6 +284,11 @@ public class Main {
 				input.setText("");
 				textSimbolos.setText("");
 				textTokens.setText("");
+				textExp.setText("");
+				textArea.setText("");
+				txtPrefija.setText("");
+				txtPosfija.setText("");
+				
 			}
 		});
 		btnLimpiar.setFont(new Font("Georgia", Font.BOLD, 11));
@@ -315,6 +327,8 @@ public class Main {
 		btnGenExpresiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textExp.setText(auxTxtExp);
+				auxTxtExp = "";
+				
 			}
 		});
 		btnGenExpresiones.setBounds(10, 77, 195, 42);
@@ -324,7 +338,7 @@ public class Main {
 		scrollPane_4.setBounds(10, 202, 462, 116);
 		panelExpresiones.add(scrollPane_4);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		scrollPane_4.setViewportView(textArea);
 		
 		
@@ -332,7 +346,7 @@ public class Main {
 		scrollPane_5.setBounds(10, 411, 235, 34);
 		panelExpresiones.add(scrollPane_5);
 		
-		JTextArea txtPrefija = new JTextArea();
+		txtPrefija = new JTextArea();
 		txtPrefija.setEditable(false);
 		txtPrefija.setBounds(10, 411, 235, 34);
 		scrollPane_5.setViewportView(txtPrefija);
@@ -342,7 +356,7 @@ public class Main {
 		scrollPane_6.setBounds(255, 411, 235, 34);
 		panelExpresiones.add(scrollPane_6);
 		
-		JTextArea txtPosfija = new JTextArea();
+		txtPosfija = new JTextArea();
 		txtPosfija.setEditable(false);
 		txtPosfija.setBounds(255, 411, 235, 34);
 		scrollPane_6.setViewportView(txtPosfija);
@@ -394,10 +408,11 @@ public class Main {
 					textArea.setText(auxExp);
 					}
 				}
-				//Infija y posFija
-				for (int i = 0; i < exp.notacionPrefija.size(); i++) {
-					auxPrefija += " " + exp.notacionPrefija.get(i);
-				}
+				auxExp = "";
+				
+				//Prefija y posFija
+				auxPrefija = exp.infixToPreFix(exp.strInfix);
+				
 				
 				for (int i = 0; i < exp.notacionPosfija.size(); i++) {
 					auxPosfija += " " + exp.notacionPosfija.get(i);
