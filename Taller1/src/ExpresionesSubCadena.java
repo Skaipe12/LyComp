@@ -280,7 +280,7 @@ public class ExpresionesSubCadena {
     }
 	
 	/*
-	 * Function: precedence.
+	 * Function: infixToPreFix.
 	 * Método que se utiliza para convertir la expresión entregada en notación infija y mediante el uso de pilas convertir la expresión a notación prefija.
 	 * Returns: 
 	 * 
